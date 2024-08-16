@@ -1,0 +1,20 @@
+General Guidelines for Project Report (SRS)
+
+Abstract
+Abstract represents a summarized report of the complete project in a very concise and informative format covering the main objective and aim of the project, the background information, processes and methods used, and methodologies implemented, followed with a brief conclusion of two to three lines talking about the results and scope of the project.
+
+The entire abstract of a project report should be written in about 250 to 350 words, and therefore, should not exceed any further
+
+
+Numbering of Page
+The beginning sections like Acknowledgement, Abstract, Table of Contents, Symbols List, figure list, tables list must be assigned with roman numbers (i, ii, etc). 
+In the first chapter, from the main page onwards, we must assign Arabic numerals like 1 2 3, etc.
+
+
+
+The Dimension of Page, Typing & Specifications of Binding
+The project report page must be in A4 size and the binding of the project report must be hardbound not spiral binding including a printed cover page on it in a particular format.
+The format and the font size of the text used in the project, the Times’ new roman format with 12 font size. The space between each line must be 1.5.
+Space must be maintained in between text as well as quotations.
+Chapter heading and section headings must be in Times New Roman with bold & 15 pts in all capitals. In every heading, the casing is very important which means the first letter in the word must be capital.
+For the margins, the regular text includes these formats RIGHT = 1.00″, LEFT = 1.50″, TOP = 1.00″ & BOTTOM = 1.00
