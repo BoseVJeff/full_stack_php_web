@@ -1,1 +1,9 @@
+# pdflatex build files
 latex-aux/
+
+# Formatter files
+srs.aux
+srs.fdb_latexmk
+srs.fls
+srs.synctex.gz
+srs.log

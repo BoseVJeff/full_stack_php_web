@@ -1,14 +1,53 @@
-\documentclass{report}
+\documentclass[a4paper]{report}
 \usepackage{afterpage}
 \usepackage{xcolor}
 \usepackage{pagecolor}
+\usepackage{setspace}
+\usepackage{graphicx}
 
-\title{\color{white} SRS Document}
-\author{\color{white} Vineet Maurya}
+% From: https://stackoverflow.com/a/877635
+% Font family names: https://www.overleaf.com/learn/latex/Font_typefaces
+\fontfamily{times}
 
 \begin{document}
 \newpagecolor{black}\afterpage{\restorepagecolor}
-\maketitle
+\begin{titlepage}
+    \onehalfspacing
+    \setlength{\baselineskip}{18pt}
+    \color{white}
+    \begin{center}
+        \textbf{\LARGE{A\\ }}
+
+        \textbf{\LARGE{PROJECT REPORT}}
+
+        \textbf{\LARGE{ON}}
+
+        \Large{\underline{Cloud-based File Storage System}}
+        \vspace{1cm}
+
+        \textbf{\underline{SUBMITTED BY}}
+
+        Vineet Maurya
+        \vspace{1cm}
+
+        \textbf{ACADEMIC YEAR 2024-25\\
+            S.Y. B.C.A. SEM-3}
+        \vspace{1cm}
+
+        \textbf{\underline{UNDER THE GUIDANCE OF}}\\
+        Name of Faculty\\
+        \textbf{Navrachna University}
+        \vspace{1cm}
+
+        \textbf{\underline{SUBMITTED TO}}
+        \vspace{0.5cm}
+
+        \includegraphics{nuv_logo.png}
+        \vspace{0.5cm}
+
+        \textbf{Navrachna University}
+    \end{center}
+\end{titlepage}
 \newpage
 First Page!
 \end{document}
