@@ -7,3 +7,7 @@ srs.fdb_latexmk
 srs.fls
 srs.synctex.gz
 srs.log
+srs.idx
+srs.ilg
+srs.ind
+srs.toc

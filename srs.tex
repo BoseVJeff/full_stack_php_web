@@ -1,13 +1,22 @@
-\documentclass[a4paper]{report}
+\documentclass[12pt,a4paper]{report}
 \usepackage{afterpage}
 \usepackage{xcolor}
 \usepackage{pagecolor}
 \usepackage{setspace}
 \usepackage{graphicx}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{titlesec}
+\usepackage{imakeidx}
+\usepackage[normalem]{ulem}
+
+\titleformat{\chapter}{\large\bfseries\centering}{}{1em}{\MakeUppercase}[\hrule]
 
 % From: https://stackoverflow.com/a/877635
 % Font family names: https://www.overleaf.com/learn/latex/Font_typefaces
 \fontfamily{times}
+
+\makeindex
 
 \begin{document}
 \newpagecolor{black}\afterpage{\restorepagecolor}
@@ -16,7 +25,7 @@
     \setlength{\baselineskip}{18pt}
     \color{white}
     \begin{center}
-        \textbf{\LARGE{A\\ }}
+        \textbf{\LARGE{A}}
 
         \textbf{\LARGE{PROJECT REPORT}}
 
@@ -30,12 +39,16 @@
         Vineet Maurya
         \vspace{1cm}
 
-        \textbf{ACADEMIC YEAR 2024-25\\
-            S.Y. B.C.A. SEM-3}
+        \textbf{ACADEMIC YEAR 2024-25}
+
+
+        \textbf{S.Y. B.C.A. SEM-3}
         \vspace{1cm}
 
-        \textbf{\underline{UNDER THE GUIDANCE OF}}\\
-        Name of Faculty\\
+        \textbf{\underline{UNDER THE GUIDANCE OF}}
+
+        Name of Faculty
+
         \textbf{Navrachna University}
         \vspace{1cm}
 
@@ -51,9 +64,10 @@
 \newpage
 \onehalfspacing
 \setlength{\baselineskip}{18pt}
+\pagenumbering{gobble}
 \color{black}
 \begin{center}
-    \textbf{\LARGE{A\\ }}
+    \textbf{\LARGE{A}}
 
     \textbf{\LARGE{PROJECT REPORT}}
 
@@ -67,12 +81,15 @@
     Vineet Maurya
     \vspace{1cm}
 
-    \textbf{ACADEMIC YEAR 2024-25\\
-        S.Y. B.C.A. SEM-3}
+    \textbf{ACADEMIC YEAR 2024-25}
+
+    \textbf{S.Y. B.C.A. SEM-3}
     \vspace{1cm}
 
-    \textbf{\underline{UNDER THE GUIDANCE OF}}\\
-    Name of Faculty\\
+    \textbf{\underline{UNDER THE GUIDANCE OF}}
+
+    Name of Faculty
+
     \textbf{Navrachna University}
     \vspace{1cm}
 
@@ -84,4 +101,37 @@
 
     \textbf{Navrachna University}
 \end{center}
+\newpage
+\pagenumbering{roman}
+\setcounter{page}{1}
+Abstract
+\newpage
+Acknowledgement
+\newpage
+Project Profile
+\newpage
+\pagenumbering{gobble}
+\chapter{Index}
+\tableofcontents
+% \makeindex
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\chapter{SDLC Overview}
+\newpage
+\chapter{Requirement Gathering and Analysis}
+\newpage
+\chapter{System Requirement Specifications}
+\newpage
+\chapter{System Analysis and Modelling}
+\newpage
+\chapter{Test Cases}
+\newpage
+\chapter{Screenshots}
+\newpage
+\chapter{Limitations and Future Enhancements}
+\newpage
+\chapter{Conclusion}
+\newpage
+\chapter{References and Bibilography}
 \end{document}
