@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "james-yu.latex-workshop",
-        "skellock.just"
+        "skellock.just",
+        "ms-vscode-remote.remote-containers"
     ]
 }
