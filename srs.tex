@@ -11,6 +11,9 @@
 \usepackage[normalem]{ulem}
 
 \titleformat{\chapter}{\large\bfseries\centering}{}{1em}{\MakeUppercase}[\hrule]
+\titleformat{\section}{\large\bfseries\centering}{}{1em}{}
+
+\renewcommand*{\contentsname}{\uppercase{Index}}
 
 % From: https://stackoverflow.com/a/877635
 % Font family names: https://www.overleaf.com/learn/latex/Font_typefaces
@@ -21,52 +24,10 @@
 \begin{document}
 \newpagecolor{black}\afterpage{\restorepagecolor}
 \begin{titlepage}
-    \onehalfspacing
-    \setlength{\baselineskip}{18pt}
-    \color{white}
-    \begin{center}
-        \textbf{\LARGE{A}}
-
-        \textbf{\LARGE{PROJECT REPORT}}
-
-        \textbf{\LARGE{ON}}
-
-        \Large{\underline{Cloud-based File Storage System}}
-        \vspace{1cm}
-
-        \textbf{\underline{SUBMITTED BY}}
-
-        Vineet Maurya
-        \vspace{1cm}
-
-        \textbf{ACADEMIC YEAR 2024-25}
-
-
-        \textbf{S.Y. B.C.A. SEM-3}
-        \vspace{1cm}
-
-        \textbf{\underline{UNDER THE GUIDANCE OF}}
-
-        Name of Faculty
-
-        \textbf{Navrachna University}
-        \vspace{1cm}
-
-        \textbf{\underline{SUBMITTED TO}}
-        \vspace{0.5cm}
-
-        \includegraphics{nuv_logo.png}
-        \vspace{0.5cm}
-
-        \textbf{Navrachna University}
-    \end{center}
-\end{titlepage}
-\newpage
-\onehalfspacing
-\setlength{\baselineskip}{18pt}
-\pagenumbering{gobble}
-\color{black}
-\begin{center}
+  \onehalfspacing
+  \setlength{\baselineskip}{18pt}
+  \color{white}
+  \begin{center}
     \textbf{\LARGE{A}}
 
     \textbf{\LARGE{PROJECT REPORT}}
@@ -82,6 +43,7 @@
     \vspace{1cm}
 
     \textbf{ACADEMIC YEAR 2024-25}
+
 
     \textbf{S.Y. B.C.A. SEM-3}
     \vspace{1cm}
@@ -100,6 +62,47 @@
     \vspace{0.5cm}
 
     \textbf{Navrachna University}
+  \end{center}
+\end{titlepage}
+\newpage
+\onehalfspacing
+\setlength{\baselineskip}{18pt}
+\pagenumbering{gobble}
+\color{black}
+\begin{center}
+  \textbf{\LARGE{A}}
+
+  \textbf{\LARGE{PROJECT REPORT}}
+
+  \textbf{\LARGE{ON}}
+
+  \Large{\underline{Cloud-based File Storage System}}
+  \vspace{1cm}
+
+  \textbf{\underline{SUBMITTED BY}}
+
+  Vineet Maurya
+  \vspace{1cm}
+
+  \textbf{ACADEMIC YEAR 2024-25}
+
+  \textbf{S.Y. B.C.A. SEM-3}
+  \vspace{1cm}
+
+  \textbf{\underline{UNDER THE GUIDANCE OF}}
+
+  Name of Faculty
+
+  \textbf{Navrachna University}
+  \vspace{1cm}
+
+  \textbf{\underline{SUBMITTED TO}}
+  \vspace{0.5cm}
+
+  \includegraphics{nuv_logo.png}
+  \vspace{0.5cm}
+
+  \textbf{Navrachna University}
 \end{center}
 \newpage
 \pagenumbering{roman}
@@ -111,7 +114,6 @@ Acknowledgement
 Project Profile
 \newpage
 \pagenumbering{gobble}
-\chapter{Index}
 \tableofcontents
 % \makeindex
 \newpage
@@ -120,10 +122,26 @@ Project Profile
 \chapter{SDLC Overview}
 \newpage
 \chapter{Requirement Gathering and Analysis}
+\section{Organization Details}
+\section{Meetings}
+\section{Data which will be Input into the System}
+\section{Data which will be Output from the System}
+\section{Type of Project}
+\section{Method of collecting Data}
 \newpage
 \chapter{System Requirement Specifications}
+\section{Introduction}
+\section{Overall Description}
+\section{External Interface Requirements}
+\section{System Features}
+\section{Other Non-Functional Requirements}
 \newpage
 \chapter{System Analysis and Modelling}
+\section{Use case Diagram}
+\section{Normalization and E-R Diagram}
+\section{Data Dictionary}
+\section{Functional and Behavioural Modelling}
+\section{Gantt Chart}
 \newpage
 \chapter{Test Cases}
 \newpage
