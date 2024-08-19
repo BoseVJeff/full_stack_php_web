@@ -2,7 +2,7 @@
 
 % For page color for title page.
 \usepackage{afterpage}
-\usepackage{xcolor}
+\usepackage[table]{xcolor}
 \usepackage{pagecolor}
 
 % To set padding in the title pages
@@ -116,11 +116,33 @@
 \newpage
 \pagenumbering{roman}
 \setcounter{page}{1}
-Abstract
+\chapter*{Abstract}
 \newpage
-Acknowledgement
+\chapter*{Acknowledgement}
 \newpage
-Project Profile
+\chapter*{Project Profile}
+\begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+        \multicolumn{2}{|c|}{\cellcolor{black} \color{white} \textbf{Student Information}} \\
+        \hline
+        \textbf{Name}            & \textbf{Enrollment Number}                              \\
+        Vineet Maurya            & 23000068                                                \\
+        \hline
+        \multicolumn{2}{|c|}{\cellcolor{black} \color{white} \textbf{Project Details}}     \\
+        \hline
+        \textbf{Project Title}   & The File Spot - A Cloud based File Storage System       \\
+        \hline
+        \textbf{Duration}        & Insert Duration Here                                    \\
+        \hline
+        \textbf{Name of Project} & Insert Project Name Here                                \\
+        \hline
+        \textbf{Platform}        & Web                                                     \\
+        \hline
+        \textbf{Team Size}       & 1                                                       \\
+        \hline
+    \end{tabular}
+\end{center}
 \newpage
 \pagenumbering{gobble}
 \tableofcontents
