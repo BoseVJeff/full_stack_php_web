@@ -1,15 +1,24 @@
 \documentclass[12pt,a4paper]{report}
+
+% For page color for title page.
 \usepackage{afterpage}
 \usepackage{xcolor}
 \usepackage{pagecolor}
+
+% To set padding in the title pages
 \usepackage{setspace}
+% To include images in the document
 \usepackage{graphicx}
+
+% Set page margins
 \usepackage{geometry}
 \geometry{margin=1in}
-\usepackage{titlesec}
-\usepackage{imakeidx}
-\usepackage[normalem]{ulem}
 
+% \usepackage{imakeidx}
+% \usepackage[normalem]{ulem}
+
+% Format chapter, section, and other titles shown on the pages
+\usepackage{titlesec}
 \titleformat{\chapter}{\large\bfseries\centering}{}{1em}{\MakeUppercase}[\hrule]
 \titleformat{\section}{\large\bfseries\centering}{}{1em}{}
 
@@ -24,10 +33,52 @@
 \begin{document}
 \newpagecolor{black}\afterpage{\restorepagecolor}
 \begin{titlepage}
-  \onehalfspacing
-  \setlength{\baselineskip}{18pt}
-  \color{white}
-  \begin{center}
+    \onehalfspacing
+    \setlength{\baselineskip}{18pt}
+    \color{white}
+    \begin{center}
+        \textbf{\LARGE{A}}
+
+        \textbf{\LARGE{PROJECT REPORT}}
+
+        \textbf{\LARGE{ON}}
+
+        \Large{\underline{Cloud-based File Storage System}}
+        \vspace{1cm}
+
+        \textbf{\underline{SUBMITTED BY}}
+
+        Vineet Maurya
+        \vspace{1cm}
+
+        \textbf{ACADEMIC YEAR 2024-25}
+
+
+        \textbf{S.Y. B.C.A. SEM-3}
+        \vspace{1cm}
+
+        \textbf{\underline{UNDER THE GUIDANCE OF}}
+
+        Name of Faculty
+
+        \textbf{Navrachna University}
+        \vspace{1cm}
+
+        \textbf{\underline{SUBMITTED TO}}
+        \vspace{0.5cm}
+
+        \includegraphics{nuv_logo.png}
+        \vspace{0.5cm}
+
+        \textbf{Navrachna University}
+    \end{center}
+\end{titlepage}
+\newpage
+\onehalfspacing
+\setlength{\baselineskip}{18pt}
+\pagenumbering{gobble}
+\color{black}
+\begin{center}
     \textbf{\LARGE{A}}
 
     \textbf{\LARGE{PROJECT REPORT}}
@@ -43,7 +94,6 @@
     \vspace{1cm}
 
     \textbf{ACADEMIC YEAR 2024-25}
-
 
     \textbf{S.Y. B.C.A. SEM-3}
     \vspace{1cm}
@@ -62,47 +112,6 @@
     \vspace{0.5cm}
 
     \textbf{Navrachna University}
-  \end{center}
-\end{titlepage}
-\newpage
-\onehalfspacing
-\setlength{\baselineskip}{18pt}
-\pagenumbering{gobble}
-\color{black}
-\begin{center}
-  \textbf{\LARGE{A}}
-
-  \textbf{\LARGE{PROJECT REPORT}}
-
-  \textbf{\LARGE{ON}}
-
-  \Large{\underline{Cloud-based File Storage System}}
-  \vspace{1cm}
-
-  \textbf{\underline{SUBMITTED BY}}
-
-  Vineet Maurya
-  \vspace{1cm}
-
-  \textbf{ACADEMIC YEAR 2024-25}
-
-  \textbf{S.Y. B.C.A. SEM-3}
-  \vspace{1cm}
-
-  \textbf{\underline{UNDER THE GUIDANCE OF}}
-
-  Name of Faculty
-
-  \textbf{Navrachna University}
-  \vspace{1cm}
-
-  \textbf{\underline{SUBMITTED TO}}
-  \vspace{0.5cm}
-
-  \includegraphics{nuv_logo.png}
-  \vspace{0.5cm}
-
-  \textbf{Navrachna University}
 \end{center}
 \newpage
 \pagenumbering{roman}
