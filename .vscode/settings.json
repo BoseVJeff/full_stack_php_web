@@ -1,7 +1,7 @@
 {
     "customLocalFormatters.formatters": [
         {
-            "command": "latexindent",
+            "command": "latexindent -c docs/latex-aux",
             "languages": [
                 "latex"
             ]
