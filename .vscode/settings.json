@@ -1,0 +1,10 @@
+{
+    "customLocalFormatters.formatters": [
+        {
+            "command": "latexindent",
+            "languages": [
+                "latex"
+            ]
+        }
+    ]
+}
