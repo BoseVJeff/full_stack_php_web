@@ -12,6 +12,26 @@
                 "id": "file-pdf"
             },
             "problemMatcher": []
-        }
+        },
+        {
+            "label": "Format SRS Source",
+            "type": "shell",
+            "command": "just format-tex",
+            "detail": "Format SRS LaTeX source using `latexindent`",
+            "icon": {
+                "id": "file-pdf"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Format TeX",
+            "type": "shell",
+            "command": "latexindent -wd --silent ${file}",
+            "detail": "Format current file",
+            "icon": {
+                "id": "file-pdf"
+            },
+            "problemMatcher": []
+        },
     ]
 }
