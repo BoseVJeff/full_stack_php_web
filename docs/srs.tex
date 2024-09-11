@@ -163,10 +163,51 @@
 \newpage
 \chapter{System Requirement Specifications}
 \section{Introduction}
+The Files Spot (henceforth reffered to as TFS) is a simple file-storage service. It allows for simple and easy file backup, organization, and sharing.
+
+Many cloud storage solutions are currently available for general use for the public. These are usually either barebones storage services like Amazon S3 aimed at developers to build on top of, or customer-friendly services like Google Drive and Microsoft Onedrive. Unfortunately, services between these two extremes are few and far between. TFS aims to fill this gap in the cloud storage space.
+
+TFS is aimed squarely at power users who want a simple cloud storage service to store and backup their files in. Towards this end, TFS aims to deliver on two fronts - a simple user interface that makes it easy to get started, and a flexible API that allows for easy automation and integration with existing automation tools.
+
+\subsection{Purpose}
+\subsection{Document Conventions}
+\subsection{Intended Audience and Reading Suggestions}
+\subsection{Project Scope}
+\subsection{References}
+
 \section{Overall Description}
-\section{External Interface Requirements}
+On the user side, The Files Spot (TFS) is a simple web application that can be accessed from any web browser. It will have a UI for uploading new files to the cloud and a UI to manage files that have already been uploaded to the cloud. The UI will be very simple and minimalistic to ensure that it can be easily parsed by tools and other accessiblity tools.
+
+On the backend, it will be a simple file storage service written in PHP that will manage files for multiple users. It will also allow users to share files - both to specific users or to the public at large. File management will be primarily accomplished via tags set by the user.
+
+\subsection{Product Perspective}
+\subsection{Product Features}
+\subsection{Use Cases and Characteristics}
+\subsection{Operating Environment}
+\subsection{Design and Implementation Constratints}
+\subsection{User Documentation}
+\subsection{Assumption and Dependencies}
+
 \section{System Features}
+The system storage will be backed by a standard disk on the server. Each file will then also be recorded in a Postgresql database along with some metadata. This metadata will allow the server to verify that the file is in the state it was uploaded in.
+
+\subsection{System Feature 1}
+
+\section{External Interface Requirements}
+
+\subsection{User Interfaces}
+\subsection{Hardware Interfaces}
+\subsection{Software Interfaces}
+\subsection{Communication Interfaces}
+
 \section{Other Non-Functional Requirements}
+
+\subsection{Performance Requirements}
+\subsection{Safety Requirements}
+\subsection{Security Requirements}
+\subsection{Software Quality Attributes}
+
+\section{Other Requirements}
 \newpage
 \chapter{System Analysis and Modelling}
 \section{Use case Diagram}
