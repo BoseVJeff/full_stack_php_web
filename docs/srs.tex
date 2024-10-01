@@ -1,5 +1,15 @@
 \documentclass[12pt,a4paper]{report}
 
+% For table of Contents
+\usepackage{multirow}
+\usepackage{tabularx} % For flexible columns in ToC
+
+% Used for page border on title page
+% From https://tex.stackexchange.com/a/232684
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{eso-pic}
+
 % For page color for title page.
 \usepackage{afterpage}
 \usepackage[table]{xcolor}
@@ -12,16 +22,18 @@
 \graphicspath{{./assets/}}
 
 % Set page margins
-\usepackage{geometry}
+\usepackage[bindingoffset=0in]{geometry}
 \geometry{margin=1in}
 
 % \usepackage{imakeidx}
 % \usepackage[normalem]{ulem}
 
 % Format chapter, section, and other titles shown on the pages
+% For centered titles, add `\centering` to the second argument
+% Use `\theX` (X=chapter,section,etc) the get the chapter/section/etc number
 \usepackage{titlesec}
 \titleformat{\chapter}{\large\bfseries\centering}{}{1em}{\MakeUppercase}[\hrule]
-\titleformat{\section}{\large\bfseries\centering}{}{1em}{}
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
 
 % Setting ToC heading
 \renewcommand*{\contentsname}{\uppercase{Index}}
@@ -133,8 +145,10 @@
 \pagenumbering{roman}
 \setcounter{page}{1}
 \chapter*{Abstract}
+This project represents the design and development of \textit{The Files Spot}, a file hosting and sharing service. It is aimed squarely at users who want more powerful functionality than what the existing file upload services provide. It leverages a flexible, web-based architecture to ensure that the service is available on whatever platform the user is on. The backend service is written in PHP and serves a basic HTML/CSS/JS frontend. The main features of this service include a very lightweight and responsive frontend for casual use and a flexible JSON API for those who want more control over their file management workflows.
 \newpage
 \chapter*{Acknowledgement}
+
 \newpage
 \chapter*{Project Profile}
 \begin{center}
@@ -161,34 +175,140 @@
 \end{center}
 \newpage
 \pagenumbering{gobble}
-\tableofcontents
+\newpage
+%\tableofcontents
+\chapter*{Index}
+% Page border (`*` variant to ensure that styling applies to this page only)
+% From: https://tex.stackexchange.com/a/232684
+\AddToShipoutPictureBG*{%
+	\begin{tikzpicture}[overlay,remember picture]
+		\draw[line width=2pt]
+		($ (current page.north west) + (1cm,-1cm) $)
+		rectangle
+		($ (current page.south east) + (-1cm,1cm) $);
+		\draw[line width=1pt]
+		($ (current page.north west) + (1.1cm,-1.1cm) $)
+		rectangle
+		($ (current page.south east) + (-1.1cm,1.1cm) $);
+	\end{tikzpicture}
+}
+\begin{tabularx}{\textwidth}{|c|X|c|}
+	\hline
+	\uppercase{Sr. No.} & \centerline{\uppercase{Title}}                                  & \uppercase{Page No.}                                \\
+	\hline
+	1                   & \uppercase{SDLC Overview}                                       & \pageref{cha:sdlc_overview}                         \\
+	\hline
+	\multirow{7}{*}{2}  & \uppercase{Requirement Gathering and Analysis}                  & \pageref{sec:requirement_gathering_and_analysis}    \\
+	\cline{2-3}
+	                    & \quad \quad \quad 2.1 Organization Details                      & \pageref{sec:organization_details}                  \\
+	\cline{2-3}
+	                    & \quad \quad \quad 2.2 Meetings                                  & \pageref{sec:meetings}                              \\
+	\cline{2-3}
+	                    & \quad \quad \quad 2.3 Data which will be Input into the System  & \pageref{sec:data_which_will_be_input_into_system}  \\
+	\cline{2-3}
+	                    & \quad \quad \quad 2.4 Data which will be Output from the System & \pageref{sec:data_which_will_be_output_from_system} \\
+	\cline{2-3}
+	                    & \quad \quad \quad 2.5 Type of Project                           & \pageref{sec:type_of_project}                       \\
+	\cline{2-3}
+	                    & \quad \quad \quad 2.6 Method of Collecting Data                 & \pageref{sec:method_of_collecting_data}             \\
+	\hline
+	\multirow{6}{*}{3}  & \uppercase{System Requirement Specifications}                   & \pageref{cha:system_requirement_specifications}     \\
+	\cline{2-3}
+	                    & \quad \quad \quad 3.1 Introduction                              & \pageref{sec:introduction}                          \\
+	\cline{2-3}
+	                    & \quad \quad \quad 3.2 Overall Description                       & \pageref{sec:overall_description}                   \\
+	\cline{2-3}
+	                    & \quad \quad \quad 3.3 System Features                           & \pageref{sec:system_features}                       \\
+	\cline{2-3}
+	                    & \quad \quad \quad 3.4 External Interface Requirements           & \pageref{sec:external_interface_requirements}       \\
+	\cline{2-3}
+	                    & \quad \quad \quad 3.5 Other Non-Functional Requirements         & \pageref{sec:other_non_functional_requirements}     \\
+	\hline
+	\multirow{6}{*}{4}  & \uppercase{System Analysis and Modelling}                       & \pageref{cha:system_analysis_and_modelling}         \\
+	\cline{2-3}
+	                    & \quad \quad \quad 4.1 Use Case Diagram                          & \pageref{sec:use_case_diagram}                      \\
+	\cline{2-3}
+	                    & \quad \quad \quad 4.2 Normalization and ER Diagram              & \pageref{sec:normalisation_and_er_diagram}          \\
+	\cline{2-3}
+	                    & \quad \quad \quad 4.3 Data Dictionary                           & \pageref{sec:data_dictionary}                       \\
+	\cline{2-3}
+	                    & \quad \quad \quad 4.4 Functional and Behaviour Modelling        & \pageref{sec:functional_and_behavioural_modelling}  \\
+	\cline{2-3}
+	                    & \quad \quad \quad 4.5 Gantt Chart                               & \pageref{sec:gantt_chart}                           \\
+	\hline
+	5                   & \uppercase{Test Cases}                                          & \pageref{cha:test_cases}                            \\
+	\hline
+	6                   & \uppercase{Screenshots}                                         & \pageref{cha:screenshots}                           \\
+	\hline
+	7                   & \uppercase{Limitations and Future Enhancements}                 & \pageref{cha:limitations_and_future_enhancements}   \\
+	\hline
+	8                   & \uppercase{Conclusion}                                          & \pageref{cha:conclusion}                            \\
+	\hline
+	9                   & \uppercase{References and Bibilography}                         & \pageref{cha:references_and_bibilography}           \\
+	\hline
+\end{tabularx}
+% \normalsize
 % \makeindex
 \newpage
 \pagenumbering{arabic}
 \setcounter{page}{1}
-\chapter{SDLC Overview}
+\chapter{SDLC Overview}\label{cha:sdlc_overview}
 \newpage
-\chapter{Requirement Gathering and Analysis}
-\section{Organization Details}
-\section{Meetings}
-\section{Data which will be Input into the System}
-\section{Data which will be Output from the System}
-\section{Type of Project}
-\section{Method of collecting Data}
+\chapter{Requirement Gathering and Analysis}\label{sec:requirement_gathering_and_analysis}
+\section{Organization Details}\label{sec:organization_details}
+
+This service was made to fulfill part of the requirements for BCA III semester.
+
+\section{Meetings}\label{sec:meetings}
+\section{Data which will be Input into the System}\label{sec:data_which_will_be_input_into_system}
+The service, by design, aims to require minimal data from the user. Aside from the username/password combo, only files themselves are the only other major form of data that most users are expected to input into the system.
+
+Listed here, in no particular order, are all of the different kinds of data that can be input into the system:
+\begin{itemize}
+	\item \textbf{Account Details}
+
+	      \textbf{Account Details} include data like usernames (arbritary string data), passwords (arbritary secure string data), and recovery email addresses (personal string data). The usernames are unique per-user and will be stored into the application database as-is. The passwords will be salted, hashed, and stored in a database and correlated with the username. The emails will be stored in a database as-is, correlated with the username. Note that emails are optional, and thus a username may/may not have an email address associated with it.
+
+	\item \textbf{Files}
+
+	      \textbf{Files} include the files themselves as well as any metadata that is associated with or generated from them. The metadata itself is associated with a file and is stored within the application database, and includes data like \texttt{upload\_date}, \texttt{uploader\_account}, etc. The files themselves are stored in a seperate storage space. This space is accessed only during file upload/download processes. All other interactions refer to the file's metadata stored within the application database.
+
+	\item \textbf{Connection Metadata}
+
+	      Some \textbf{Connection Metadata} about every file access is stored in the application database. This is mainly intended to control file access and to provide that data that powers the user's file access dashboard. For all users, this data includes access time. For logged in users, the data additionally includes the user's identity. For logged out users, this includes the connecting IP address. In both cases, simply visiting/accessing a page/file \textit{does not} set any kind of cookies or any other persistent storage on the visitor's user agent. Therefore, there is no data to see if the same user accessed the same page/file multiple times.
+\end{itemize}
+
+\section{Data which will be Output from the System}\label{sec:data_which_will_be_output_from_system}
+Most of the data that will be output from the system will be the files that were previously uploaded by users. The system does not generate any user-facing files by itself.
+
+The system does generate logs. These logs will be stored to a file on the server that is running the service. These logs will be accessible only from the server admin side.
+\section{Type of Project}\label{sec:type_of_project}
+This is a web-based service with seperate front and back ends. The back end is written in PHP with a MySQL database for data storage. The front end is a HTML/CSS/JS frontend that runs on the client's browser. Both sides communicate with each other over a RESTful JSON API.
+\section{Method of collecting Data}\label{sec:method_of_collecting_data}
+Data about other similar services was collected by using the services themselves and by reading about the experiences other people had when using the service. Particular attention was paid to the pain points that surfaced during use and from other users online.
 \newpage
-\chapter{System Requirement Specifications}
-\section{Introduction}
+\chapter{System Requirement Specifications}\label{cha:system_requirement_specifications}
+\section{Introduction}\label{sec:introduction}
 The Files Spot (henceforth reffered to as TFS) is a simple file-storage service. It allows for simple and easy file backup, organization, and sharing.
 \subsection{Purpose}
 Many cloud storage solutions are currently available for general use for the public. These are usually either barebones storage services like Amazon S3 aimed at developers to build on top of, or customer-friendly services like Google Drive and Microsoft Onedrive. Unfortunately, services between these two extremes are few and far between. The Files Spot aims to fill this gap in the cloud storage space.
 
 TFS is aimed squarely at power users who want a simple cloud storage service to store and backup their files in. Towards this end, TFS aims to deliver on two fronts - a simple user interface that makes it easy to get started, and a flexible API that allows for easy automation and integration with existing automation tools.
 \subsection{Document Conventions}
-The File Spot is henceforth reffered to as TFS in the rest fo this document.
+The File Spot is henceforth reffered to as TFS in the rest of this document.
 
 Users in this document is used to refer to anyone who uses the service, either via the provided web client or via the API.
 
 In this document, clients refer to both the web client and to any service that consumes the service via the provied API. This includes, but is not limited to, various automation services that may use the service by scraping/parsing the web client instead of using the API.
+
+All code in this document is \texttt{written like this}. It will be case-sensitive, and is intended to be parsed as-is.
+
+Some portions of this document will require the user to replace the placeholder values with their own values.
+The placeholders will be formatted as \texttt{\textsl{<placeholder>}}.
+The user/reader is expected to replace the entire placeholder text (including the \texttt{<} and \texttt{>}) with the appropriate value of their own.
+
+Some other portion of the document may require the user to put the result of some operation on some data and replace the placeholder with the result.
+These operations are formatted \texttt{\textit{like this(}\textsl{<with the data indicated as placeholders>}\textit{)}}.
 \subsection{Intended Audience and Reading Suggestions}
 The intended audience for this documernt includes all stakeholders and any user who wishes to know more about the workings and design principles of the service. This should be especially useful for users who are wanting to know about the rationale behind certain decisions made during the development process.
 \subsection{Project Scope}
@@ -199,9 +319,8 @@ Security is provided via a basic login/token wall. The communication may be encr
 File and data/metadata storage is a core part of this service and will be the main point of discussion in this document. Strategies to manage file access, data storage, and verification of file integrity will be an integral part of this project.
 
 Encryption of files at rest is an explicit non-goal of this service. This is to avoid potential legal complexities regarding hosting of potentially illegal content. As such, all files uploaded to this service will be visible to the admins of the service. This is ordinarily meant to allow admins to comply with legal demands, but users should make sure that they don't upload any sensitive data to this service.
-\subsection{References}
 
-\section{Overall Description}
+\section{Overall Description} \label{sec:overall_description}
 On the user side, The Files Spot (TFS) is a simple web application that can be accessed from any web browser. It will have a UI for uploading new files to the cloud and a UI to manage files that have already been uploaded to the cloud. The UI will be very simple and minimalistic to ensure that it can be easily parsed by tools and other accessiblity tools.
 
 On the backend, it will be a simple file storage service written in PHP that will manage files for multiple users. It will also allow users to share files - both to specific users or to the public at large. File management will be primarily accomplished via tags set by the user.
@@ -230,23 +349,88 @@ The web client aims to follow the principles of progressive enhancement. As a pa
 
 Another design decision to not use any large external libraries. This means that we mostly avoid large CSS libraries like Bootstrap. Instead, we opt for custom, minimal CSS and JS to power the site.
 
-On the server side, the decision to avoid React, etc means that we need a language which can stringly augment the existing HTML instead of generating a new one everytime one is requested. This leaves us with two major, battle-tested options - Python (via Jinja2 templates in Django/Flask), or PHP. Here, we opt for PHP as it is a lighter, much simpler language to make a web server in. Additionally, PHP comes with a lot of server utilities built in (database methods, etc) which removes the need for external dependencies.
+On the server side, the decision to avoid JS frameworks means that we need a language which can stringly augment the existing HTML instead of generating a new one everytime one is requested. This leaves us with two major, battle-tested options - Python (via Jinja2 templates in Django/Flask), or PHP. Here, we opt for PHP as it is a lighter, much simpler language to make a web server in. Additionally, PHP comes with a lot of server utilities built in (database methods, etc) which removes the need for many external dependencies.
 \subsection{User Documentation}
 \subsection{Assumption and Dependencies}
+On the server side, the server requires the presence of a PHP runtime on the system. Additionally, the server requires access to a MySQL instance (either locally or on a seperate server) to serve as the application database.
 
-\section{System Features}
-The system storage will be backed by a standard disk on the server. Each file will then also be recorded in a Postgresql database along with some metadata. This metadata will allow the server to verify that the file is in the state it was uploaded in.
+The web client assumes that the user has a reasonably modern web browser and a HTTP(S) connection to the server that's running the backend service. It must me capable of making and parsing various kinds of HTTP requests (GET, POST, PUT, PATCH, DELETE) Additionally, the browser must be capable of parsing and displaying HTML/CSS, with JS required for additional functionality.
 
-\subsection{System Feature 1}
+The API service simply requires a client that is capable of making various kinds of HTTP requests (GET,POST,PUT,PATCH,DELETE) and handling a JSON response.
+\section{System Features}\label{sec:system_features}
+% The system storage will be backed by a standard disk on the server. Each file will then also be recorded in a Postgresql database along with some metadata. This metadata will allow the server to verify that the file is in the state it was uploaded in.
 
-\section{External Interface Requirements}
+\subsection{API Access}
+
+The primary feature of this service that differentiates it from other similar services is the presence of a simple, but powerful API.
+This allows a user to integarte this service easily with their existing setups via something like a bash script that runs on a regular basis.
+
+The API is exposed at the \texttt{/api/} endpoint.
+Access to all but public files require the client to perform some form of authentication.
+
+The easiest way is for the user to generate a user token from another client that the user is already authenticated on.
+The token should then be passed with every request to identify the user.
+The token can be included either as \texttt{Authorization: Bearer \textsl{<user-token>}} in the request header, or as \texttt{?access\_token=\textsl{<token>}} alongside other URL query parameters.
+
+Another way is to use HTTP Basic Auth.
+In this case, the username and password for the user are directly passed as a part of the request headers.
+Note that this is heavily discouraged, as the credentials can then be revealed if the connection is insecure or if the user is a victim of a MitM attack.
+To use this auth scheme, include \texttt{Authorization: Basic \textit{base64(}\textsl{<username>}:\textsl{<password>}\textit{)}} in the request headers.
+
+Each endpoint supports some subset of the standard HTTP methods.
+The information for each endpoint is defined as follows:
+
+\begin{itemize}
+	\item \texttt{/api/\textsl{<path/to/file>}}
+
+	      \begin{itemize}
+		      \item \texttt{GET}
+
+		            Returns file contents with HTTP status \texttt{200 OK} if the file exists, and HTTP status \texttt{404 Not Found} if the file does not exist.
+		            If the user is not authorised to access the file, an HTTP \texttt{401 Unauthorized} is returned instead.
+
+		            By default, the response includes a \texttt{Content-Disposition: inline} header, indicating that the response is intended for display only.
+		            Adding \texttt{?download=true} causes the reponse header to include \texttt{Content-Disposition: attatchment; filename="\textsl{<filename.ext>}"} instead, indicating that the file is intended to be downloaded to the client's system. \textsl{filename.ext} is the filename that the file was originally uploaded with.
+
+		            By default, the entire file's contents are returned.
+		            If the request contains the \texttt{Range: bytes=\textsl{<start-offset>}-\textsl{<end-offset>}} header, the contents of the file within the range \texttt{<start-offset>}-\texttt{<end-offset>} are returned with an HTTP \texttt{206} status code instead.
+		            If the file does not exist, a HTTP \texttt{404} status code is returned instead.
+		            \texttt{<start-offset>} is clamped to the file size, with a default value of 0.
+		            \texttt{<end-offset>} is also clamped to the file size, with a default value of \texttt{file-size}.
+		            If \texttt{<start-offset>} > \texttt{<end-offset>}, an error with HTTP status \texttt{400 Bad Request} is returned.
+
+		      \item \texttt{PATCH}
+
+		            Updates a part of the file.
+		            The part of the file to be updated is indicated by the value of the \texttt{Content-Range} header (eg. \texttt{Content-Range: bytes }).
+
+		            The request \textbf{must} contain the \texttt{Range: bytes=\textsl{<start-offset>}-\textsl{<end-offset>}} header.
+		            The contents of the file within the range \texttt{<start-offset>}-\texttt{<end-offset>} are updated with the new contents.
+		            If the file does not exist, a HTTP \texttt{404} status code is returned instead.
+		            \texttt{<start-offset>} is clamped to the file size, with a default value of 0.
+		            \texttt{<end-offset>} is also clamped to the file size, with a default value of \texttt{file-size}.
+		            If \texttt{<start-offset>} \> \texttt{<end-offset>}, an error with HTTP status \texttt{400 Bad Request} is returned.
+
+		      \item \texttt{DELETE}
+
+		            Deletes the file.
+
+		            If the file does not exist, returns a HTTP \texttt{404 Not Found} response.
+		            If the user does not have the requisite permissions, \texttt{401 Unauthorized} is returned instead.
+
+		            Note that a user cannot delete part of a file.
+		            Therefore, any \texttt{Range: *} headers set on the request are ignored.
+	      \end{itemize}
+\end{itemize}
+
+\section{External Interface Requirements}\label{sec:external_interface_requirements}
 
 \subsection{User Interfaces}
 \subsection{Hardware Interfaces}
 \subsection{Software Interfaces}
 \subsection{Communication Interfaces}
 
-\section{Other Non-Functional Requirements}
+\section{Other Non-Functional Requirements}\label{sec:other_non_functional_requirements}
 
 \subsection{Performance Requirements}
 \subsection{Safety Requirements}
@@ -255,20 +439,20 @@ The system storage will be backed by a standard disk on the server. Each file wi
 
 \section{Other Requirements}
 \newpage
-\chapter{System Analysis and Modelling}
-\section{Use case Diagram}
-\section{Normalization and E-R Diagram}
-\section{Data Dictionary}
-\section{Functional and Behavioural Modelling}
-\section{Gantt Chart}
+\chapter{System Analysis and Modelling}\label{cha:system_analysis_and_modelling}
+\section{Use case Diagram}\label{sec:use_case_diagram}
+\section{Normalization and E-R Diagram}\label{sec:normalisation_and_er_diagram}
+\section{Data Dictionary}\label{sec:data_dictionary}
+\section{Functional and Behavioural Modelling}\label{sec:functional_and_behavioural_modelling}
+\section{Gantt Chart}\label{sec:gantt_chart}
 \newpage
-\chapter{Test Cases}
+\chapter{Test Cases}\label{cha:test_cases}
 \newpage
-\chapter{Screenshots}
+\chapter{Screenshots}\label{cha:screenshots}
 \newpage
-\chapter{Limitations and Future Enhancements}
+\chapter{Limitations and Future Enhancements}\label{cha:limitations_and_future_enhancements}
 \newpage
-\chapter{Conclusion}
+\chapter{Conclusion}\label{cha:conclusion}
 \newpage
-\chapter{References and Bibilography}
+\chapter{References and Bibilography}\label{cha:references_and_bibilography}
 \end{document}
