@@ -360,7 +360,7 @@ The API service simply requires a client that is capable of making various kinds
 \section{System Features}\label{sec:system_features}
 % The system storage will be backed by a standard disk on the server. Each file will then also be recorded in a Postgresql database along with some metadata. This metadata will allow the server to verify that the file is in the state it was uploaded in.
 
-\subsection{API Access}
+\subsection{API Access}\label{ssec:api_access}
 
 The primary feature of this service that differentiates it from other similar services is the presence of a simple, but powerful API.
 This allows a user to integarte this service easily with their existing setups via something like a bash script that runs on a regular basis.
@@ -424,17 +424,56 @@ The information for each endpoint is defined as follows:
 \end{itemize}
 
 \section{External Interface Requirements}\label{sec:external_interface_requirements}
+The system requires unteraction with two major external systems: a database server, and a file server.
 
+The database server is assumed to be wither MySQL, or another MySQL-compatible database server like MariaDB.
+The main app server does not make any other assumptions about the database server.
+Therefore, complications like database sharding and scaling are the responsiblity of the database server itself.
+
+The service also assumes access to a file server.
+By default, the files are stored on the same server as the app service itself i.e. the app server also acts as the default file server.
+The service itself makes no assumptions about the file server itself.
+Therefore, any file server complications (file duplication, seperate file storage service) will require the developer to write their own adapter for the server itself by \texttt{require}-ing and overriding the appropriate class.
+The default file server included in this app stores the files in a seperate folder on the app server itself.
 \subsection{User Interfaces}
+The main user interface for this service is its default web UI.
+
+The web UI is made with HTML, CSS, \& JS.
+It aims to be simple, fast, and effective.
+It allows a user to login, generate/manage user tokens for use with the API, and view/manage files that they have uploaded to the service through various means.
 \subsection{Hardware Interfaces}
+This app does not make use of any external hardware except those that power the server and the client.
+
+All interaction with the hardware server happens through PHP.
+Therefore, the hardware is assumed to be one that is capable of running a PHP server.
+
+All interaction with the client's hardware happens through the user-agent that the user uses.
+This hardware is mostly used to make requests, and store temporary data to ease the load on the app server.
 \subsection{Software Interfaces}
+The main software interface for this service is its API.
+
+The API is a major part of this service's offering.
+It is a simple, RESTful JSON API with support for standard HTTP verbs like \texttt{GET}, \texttt{POST}, \texttt{PATCH}, etc.
+
+For a complete documentation, refer to section \ref{ssec:api_access} on page \pageref{ssec:api_access}.
 \subsection{Communication Interfaces}
+The app service is defined as an app-server model with a clear boundary between the server and the client.
+Communication between the server and the client happens over a HTTP connection using a JSON API as described in section \ref{ssec:api_access} on page \pageref{ssec:api_access}.
 
 \section{Other Non-Functional Requirements}\label{sec:other_non_functional_requirements}
 
 \subsection{Performance Requirements}
+The service can handle multiple users uploading and downlaoding files at the same time.
+Although the exact number of simultaneous users depends on the exact configuration of the server hardware that powers this service, note that there is no restriction within the service framework request for limiting the number of concurrent users.
 \subsection{Safety Requirements}
+The app service makes no attempt to limit the kinds of content that a user can upload.
+Therefore, it is the user's responsiblity to ensure that the content that they upload to or access from the service is safe.
 \subsection{Security Requirements}
+The service only guarantees access-level security i.e. it guarantees that an unintended user (except the server admin) will not be able to access any of he user's files and view/modify them.
+
+The file data itself is also not encrypted both in transit (except using HSTS if configured) and at rest on the server (except when configured by the admin - see \ref{sec:external_interface_requirements} for a more detailled discussion.) by default.
+Although the service makes an attempt to ensure that the files stored are returned as uploaded (and warns the user if a difference is found), note that is could be trivially bypassed by a dedicated attacker.
+The suer must therefore employ other file integrity checks of their own (preferably out-of-band) to verify that the file downloaded has the intended contents.
 \subsection{Software Quality Attributes}
 
 \section{Other Requirements}
