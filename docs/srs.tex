@@ -58,6 +58,9 @@
 
 \makeindex
 
+% Use as \sqlref{table:students}{Students}
+\newcommand{\sqlref}[2]{References \textbf{#2} table as defined in Table \ref{#1}}
+
 \begin{document}
 \newpagecolor{black}\afterpage{\restorepagecolor}
 \begin{titlepage}
@@ -253,13 +256,23 @@ This project represents the design and development of \textit{The Files Spot}, a
 \pagenumbering{arabic}
 \setcounter{page}{1}
 \chapter{SDLC Overview}\label{cha:sdlc_overview}
+\includegraphics{se-sdlc.png}
 \newpage
 \chapter{Requirement Gathering and Analysis}\label{sec:requirement_gathering_and_analysis}
 \section{Organization Details}\label{sec:organization_details}
 
 This service was made to fulfill part of the requirements for BCA III semester.
 
+\begin{itemize}
+	\item \textbf{Name of Organization}
+	      Bachelor of Computer Applications, School of Engineering and Technology, Navarachna University, Vadodara
+
+	\item \textbf{Brief Details of Organization}
+	      The School of Engineering and Technology, Navrachna University is a place where students are taught deatils of various technical fields.
+\end{itemize}
+
 \section{Meetings}\label{sec:meetings}
+
 \section{Data which will be Input into the System}\label{sec:data_which_will_be_input_into_system}
 The service, by design, aims to require minimal data from the user. Aside from the username/password combo, only files themselves are the only other major form of data that most users are expected to input into the system.
 
@@ -482,6 +495,120 @@ These tests aim to test every aspect of the system and ensure that it matches th
 \chapter{System Analysis and Modelling}\label{cha:system_analysis_and_modelling}
 \section{Use case Diagram}\label{sec:use_case_diagram}
 \section{Normalization and E-R Diagram}\label{sec:normalisation_and_er_diagram}
+\begin{table}[h]
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Field}    & \textbf{Datatype}        & \textbf{Constraints and Other Notes} \\
+		\hline
+		Id                & Integer                  & Primary key, Autoincrement           \\
+		\hline
+		Name              & String                   & Not null, Unique                     \\
+		\hline
+		Password          & String                   & Non null, Secure                     \\
+		\hline
+		Email             & String                   & Validated                            \\
+		\hline
+		Payment Id        & String                   & From payment provider                \\
+		\hline
+		Order Id          & String                   & From payemnt provider                \\
+		\hline
+		Payment Signature & String                   & From payment provider                \\
+		\hline
+		Payment Status    & String (Success|Failure) & Verified seperately                  \\
+		\hline
+		Payment Verfied   & Boolean                  & Authenticity of payment              \\
+		\hline
+	\end{tabular}
+	\caption{User Table}
+	\label{table:user}
+\end{table}
+\begin{table}[h]
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Field} & \textbf{Datatype} & \textbf{Constraints and Other Notes} \\
+		\hline
+		Id             & Integer           & Primary key, Autoincrement           \\
+		\hline
+		Key            & String (UUID)     & Unique, Non null                     \\
+		\hline
+		Label          & String            & Human-readable, User defined         \\
+		\hline
+		User Id        & Integer           & \sqlref{table:user}{User}            \\
+		\hline
+	\end{tabular}
+	\caption{Token Table}
+	\label{table:token}
+\end{table}
+\begin{table}[h]
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Field} & \textbf{Datatype} & \textbf{Constraints and Other Notes}                     \\
+		\hline
+		Id             & Integer           & Primary key, Autoincrement                               \\
+		\hline
+		Name           & String            & Unique, Non null, As stored on disk                      \\
+		\hline
+		User Id        & Integer           & \sqlref{table:user}{User}                                \\
+		\hline
+		Last Upload    & Timestamp         & Non-null                                                 \\
+		\hline
+		Original Name  & String            & As uploaded by user                                      \\
+		\hline
+		Size           & Integer           & Non null, Used to calculate storage consumption for user \\
+		\hline
+	\end{tabular}
+	\caption{File Table}
+	\label{table:file}
+\end{table}
+\begin{table}[h]
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Field} & \textbf{Datatype} & \textbf{Constraints and Other Notes} \\
+		\hline
+		Id             & Integer           & Primary key, Autoincrement           \\
+		\hline
+		Label          & String            & Human-readable, User defined         \\
+		\hline
+		User Id        & Integer           & \sqlref{table:user}{User}            \\
+		\hline
+	\end{tabular}
+	\caption{Tag Table}
+	\label{table:tag}
+\end{table}
+\begin{table}[h]
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Field} & \textbf{Datatype} & \textbf{Constraints and Other Notes} \\
+		\hline
+		File Id        & Integer           & \sqlref{table:file}{File}            \\
+		\hline
+		Tag Id         & Integer           & \sqlref{table:tag}{Tag}              \\
+		\hline
+	\end{tabular}
+	\caption{File Tag Table}
+	\label{table:file-tag}
+\end{table}
+\begin{table}[h]
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Field}  & \textbf{Datatype} & \textbf{Constraints and Other Notes}                                           \\
+		\hline
+		Id              & Integer           & Primary key, Autoincrement                                                     \\
+		\hline
+		Name            & String            & Human-readable                                                                 \\
+		\hline
+		Description     & String (Long)     & Description of subscription benefits                                           \\
+		\hline
+		Price           & Integer           & Positive non-zero integer, defined in the smallest increment (eg. cents/paise) \\
+		\hline
+		Subscription Id & String            & Order item in payment processor                                                \\
+		\hline
+		Currency        & String            & ISO code, Default: INR                                                         \\
+		\hline
+	\end{tabular}
+	\caption{Subscription Table}
+	\label{table:subscription}
+\end{table}
 \section{Data Dictionary}\label{sec:data_dictionary}
 \section{Functional and Behavioural Modelling}\label{sec:functional_and_behavioural_modelling}
 \section{Gantt Chart}\label{sec:gantt_chart}
