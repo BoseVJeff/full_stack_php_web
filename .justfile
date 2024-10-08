@@ -12,7 +12,7 @@ format-tex:
 diff-srs:
     git show HEAD~:docs/srs.tex --format="" --no-patch > docs/old.tex;
     latexdiff docs/old.tex docs/srs.tex > docs/diff.tex
-    pdflatex -aux-directory=docs/latex-aux diff.tex --output-directory=docs/
+    pdflatex -aux-directory=docs/latex-aux docs/diff.tex --output-directory=docs/
 
 start-ldev-server:
     echo "Starting PHP dev server running at localhost:8008"
