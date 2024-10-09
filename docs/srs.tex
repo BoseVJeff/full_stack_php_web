@@ -495,16 +495,20 @@ These tests aim to test every aspect of the system and ensure that it matches th
 \chapter{System Analysis and Modelling}\label{cha:system_analysis_and_modelling}
 \section{Use case Diagram}\label{sec:use_case_diagram}
 \section{Normalization and E-R Diagram}\label{sec:normalisation_and_er_diagram}
-\begin{table}[h]
+\includegraphics[width=\textwidth]{erd.png}
+\begin{table}[h!]
 	\begin{tabular}{|c|c|c|}
 		\hline
 		\textbf{Field}    & \textbf{Datatype}        & \textbf{Constraints and Other Notes} \\
 		\hline
-		Id                & Integer                  & Primary key, Autoincrement           \\
+		Id                & Integer                  & Primary key                          \\
+		                  &                          & Autoincrement                        \\
 		\hline
-		Name              & String                   & Not null, Unique                     \\
+		Name              & String                   & Not null                             \\
+		                  &                          & Unique                               \\
 		\hline
-		Password          & String                   & Non null, Secure                     \\
+		Password          & String                   & Non null                             \\
+		                  &                          & Secure                               \\
 		\hline
 		Email             & String                   & Validated                            \\
 		\hline
@@ -522,16 +526,19 @@ These tests aim to test every aspect of the system and ensure that it matches th
 	\caption{User Table}
 	\label{table:user}
 \end{table}
-\begin{table}[h]
+\begin{table}[h!]
 	\begin{tabular}{|c|c|c|}
 		\hline
 		\textbf{Field} & \textbf{Datatype} & \textbf{Constraints and Other Notes} \\
 		\hline
-		Id             & Integer           & Primary key, Autoincrement           \\
+		Id             & Integer           & Primary key                          \\
+		               &                   & Autoincrement                        \\
 		\hline
-		Key            & String (UUID)     & Unique, Non null                     \\
+		Key            & String (UUID)     & Unique                               \\
+		               &                   & Non null                             \\
 		\hline
-		Label          & String            & Human-readable, User defined         \\
+		Label          & String            & Human-readable                       \\
+		               &                   & User defined                         \\
 		\hline
 		User Id        & Integer           & \sqlref{table:user}{User}            \\
 		\hline
@@ -539,7 +546,7 @@ These tests aim to test every aspect of the system and ensure that it matches th
 	\caption{Token Table}
 	\label{table:token}
 \end{table}
-\begin{table}[h]
+\begin{table}[h!]
 	\begin{tabular}{|c|c|c|}
 		\hline
 		\textbf{Field} & \textbf{Datatype} & \textbf{Constraints and Other Notes}                     \\
@@ -560,7 +567,7 @@ These tests aim to test every aspect of the system and ensure that it matches th
 	\caption{File Table}
 	\label{table:file}
 \end{table}
-\begin{table}[h]
+\begin{table}[h!]
 	\begin{tabular}{|c|c|c|}
 		\hline
 		\textbf{Field} & \textbf{Datatype} & \textbf{Constraints and Other Notes} \\
@@ -575,7 +582,7 @@ These tests aim to test every aspect of the system and ensure that it matches th
 	\caption{Tag Table}
 	\label{table:tag}
 \end{table}
-\begin{table}[h]
+\begin{table}[h!]
 	\begin{tabular}{|c|c|c|}
 		\hline
 		\textbf{Field} & \textbf{Datatype} & \textbf{Constraints and Other Notes} \\
@@ -588,22 +595,23 @@ These tests aim to test every aspect of the system and ensure that it matches th
 	\caption{File Tag Table}
 	\label{table:file-tag}
 \end{table}
-\begin{table}[h]
+\begin{table}[h!]
 	\begin{tabular}{|c|c|c|}
 		\hline
-		\textbf{Field}  & \textbf{Datatype} & \textbf{Constraints and Other Notes}                                           \\
+		\textbf{Field}  & \textbf{Datatype} & \textbf{Constraints and Other Notes}                \\
 		\hline
-		Id              & Integer           & Primary key, Autoincrement                                                     \\
+		Id              & Integer           & Primary key, Autoincrement                          \\
 		\hline
-		Name            & String            & Human-readable                                                                 \\
+		Name            & String            & Human-readable                                      \\
 		\hline
-		Description     & String (Long)     & Description of subscription benefits                                           \\
+		Description     & String (Long)     & Description of subscription benefits                \\
 		\hline
-		Price           & Integer           & Positive non-zero integer, defined in the smallest increment (eg. cents/paise) \\
+		Price           & Integer           & Positive non-zero integer                           \\
+		                &                   & Defined in the smallest increment (eg. cents/paise) \\
 		\hline
-		Subscription Id & String            & Order item in payment processor                                                \\
+		Subscription Id & String            & Order item in payment processor                     \\
 		\hline
-		Currency        & String            & ISO code, Default: INR                                                         \\
+		Currency        & String            & ISO code, Default: INR                              \\
 		\hline
 	\end{tabular}
 	\caption{Subscription Table}
