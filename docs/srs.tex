@@ -394,7 +394,7 @@ Each endpoint supports some subset of the standard HTTP methods.
 The information for each endpoint is defined as follows:
 
 \begin{itemize}
-	\item \texttt{/api/\textsl{<path/to/file>}}
+	\item \texttt{/api/files/\textsl{<file>}}
 
 	      \begin{itemize}
 		      \item \texttt{GET}
@@ -494,9 +494,13 @@ These tests aim to test every aspect of the system and ensure that it matches th
 \newpage
 \chapter{System Analysis and Modelling}\label{cha:system_analysis_and_modelling}
 \section{Use case Diagram}\label{sec:use_case_diagram}
-\section{Normalization and E-R Diagram}\label{sec:normalisation_and_er_diagram}
+\includegraphics[width=\textwidth]{use-case.png}
+\section{E-R Diagram}\label{sec:normalisation_and_er_diagram}
 \includegraphics[width=\textwidth]{erd.png}
+\section{Data Dictionary}\label{sec:data_dictionary}
 \begin{table}[h!]
+	\centering
+	\caption{User Table}
 	\begin{tabular}{|c|c|c|}
 		\hline
 		\textbf{Field}    & \textbf{Datatype}        & \textbf{Constraints and Other Notes} \\
@@ -523,10 +527,11 @@ These tests aim to test every aspect of the system and ensure that it matches th
 		Payment Verfied   & Boolean                  & Authenticity of payment              \\
 		\hline
 	\end{tabular}
-	\caption{User Table}
 	\label{table:user}
 \end{table}
 \begin{table}[h!]
+	\centering
+	\caption{Token Table}
 	\begin{tabular}{|c|c|c|}
 		\hline
 		\textbf{Field} & \textbf{Datatype} & \textbf{Constraints and Other Notes} \\
@@ -543,10 +548,11 @@ These tests aim to test every aspect of the system and ensure that it matches th
 		User Id        & Integer           & \sqlref{table:user}{User}            \\
 		\hline
 	\end{tabular}
-	\caption{Token Table}
 	\label{table:token}
 \end{table}
 \begin{table}[h!]
+	\centering
+	\caption{File Table}
 	\begin{tabular}{|c|c|c|}
 		\hline
 		\textbf{Field} & \textbf{Datatype} & \textbf{Constraints and Other Notes}                     \\
@@ -564,10 +570,11 @@ These tests aim to test every aspect of the system and ensure that it matches th
 		Size           & Integer           & Non null, Used to calculate storage consumption for user \\
 		\hline
 	\end{tabular}
-	\caption{File Table}
 	\label{table:file}
 \end{table}
 \begin{table}[h!]
+	\centering
+	\caption{Tag Table}
 	\begin{tabular}{|c|c|c|}
 		\hline
 		\textbf{Field} & \textbf{Datatype} & \textbf{Constraints and Other Notes} \\
@@ -579,10 +586,11 @@ These tests aim to test every aspect of the system and ensure that it matches th
 		User Id        & Integer           & \sqlref{table:user}{User}            \\
 		\hline
 	\end{tabular}
-	\caption{Tag Table}
 	\label{table:tag}
 \end{table}
 \begin{table}[h!]
+	\centering
+	\caption{File Tag Table}
 	\begin{tabular}{|c|c|c|}
 		\hline
 		\textbf{Field} & \textbf{Datatype} & \textbf{Constraints and Other Notes} \\
@@ -592,10 +600,11 @@ These tests aim to test every aspect of the system and ensure that it matches th
 		Tag Id         & Integer           & \sqlref{table:tag}{Tag}              \\
 		\hline
 	\end{tabular}
-	\caption{File Tag Table}
 	\label{table:file-tag}
 \end{table}
 \begin{table}[h!]
+	\centering
+	\caption{Subscription Table}
 	\begin{tabular}{|c|c|c|}
 		\hline
 		\textbf{Field}  & \textbf{Datatype} & \textbf{Constraints and Other Notes}                \\
@@ -614,10 +623,8 @@ These tests aim to test every aspect of the system and ensure that it matches th
 		Currency        & String            & ISO code, Default: INR                              \\
 		\hline
 	\end{tabular}
-	\caption{Subscription Table}
 	\label{table:subscription}
 \end{table}
-\section{Data Dictionary}\label{sec:data_dictionary}
 \section{Functional and Behavioural Modelling}\label{sec:functional_and_behavioural_modelling}
 \section{Gantt Chart}\label{sec:gantt_chart}
 \newpage
