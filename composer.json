@@ -1,0 +1,18 @@
+{
+    "name": "bosev/full_stack_php_web",
+    "description": "Full stack cloud-based file management app.",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Bosev\\FullStackPhpWeb\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "BoseV",
+            "email": "46490582+BoseVJeff@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}

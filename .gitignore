@@ -25,3 +25,4 @@ docs/old.tex
 
 # Ignoring `composer.phar`, as the user will be expected to bootstrap their own using the recipie in the `Justfile`.
 composer.phar
+/vendor/
