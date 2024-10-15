@@ -432,7 +432,65 @@ The information for each endpoint is defined as follows:
 		            If the user does not have the requisite permissions, \texttt{401 Unauthorized} is returned instead.
 
 		            Note that a user cannot delete part of a file.
-		            Therefore, any \texttt{Range: *} headers set on the request are ignored.
+		            Therefore, any \texttt{Range:\textasteriskcentered} headers set on the request are ignored.
+	      \end{itemize}
+
+	\item \texttt{/api/user/config}
+
+	      This endpoint returns any and all info about the user and any preferences that they may have set.
+	      This includes their username, email (if set), and all app preferences that the system has about them.
+	      Note that this endpoint \textbf{requires} an authenticated client, so any unauthenticated requests will simply return a \texttt{401 Unauthorized} response.
+
+	      The base config for a user is of the following form:
+
+	      %   \texttt{
+	      %       \{
+	      %       Name: \textsl{<name>},
+	      %       Email: \textsl{<email>},
+	      %       Subscription: \textsl{<subscription>}
+	      %       \}
+	      %   }
+
+	      \texttt{\{ }
+
+	      \texttt{\quad Name: \textsl{<name>}}
+
+	      \texttt{\quad Email: \textsl{<email>}}
+
+	      \texttt{\quad Subscription: \textsl{<subscription>}}
+
+	      \texttt{\} }
+
+	      Note that tokens are missing from this response.
+	      This aims to make it more difficult for a malicious client to take over other tokens.
+
+	      The remainder of this section assumes that requests are being made by an authenticated client.
+
+	      \begin{itemize}
+		      \item \texttt{GET}
+
+		            Gets all user preferences.
+
+		            If the user does not exist or if the token is invalid, returns \texttt{404 Not Found} instead.
+
+		      \item \texttt{POST}
+
+		            Send an new config for the user.
+
+		            Any config that the user may have is replaced with the new one.
+
+		      \item \texttt{PATCH}
+
+		            Update the config with the new values.
+
+		            Note that the rest of the config is left unchanged.
+
+		      \item \texttt{DELETE}
+
+		            Delete the user config.
+
+		            Note that the system cannot ever delete a token without deleting the corresponding user.
+		            Therefore, this action simply has the effect of resetting values back to default wherever possible.
 	      \end{itemize}
 \end{itemize}
 
