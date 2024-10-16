@@ -33,7 +33,8 @@
 % Use `\theX` (X=chapter,section,etc) the get the chapter/section/etc number
 \usepackage{titlesec}
 \titleformat{\chapter}{\large\bfseries\centering}{}{1em}{\MakeUppercase}[\hrule]
-\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\section}{\large\bfseries\centering}{}{1em}{}
+% \titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
 
 % Setting ToC heading
 \renewcommand*{\contentsname}{\uppercase{Index}}
@@ -166,9 +167,9 @@ This project represents the design and development of \textit{The Files Spot}, a
 		\hline
 		\textbf{Project Title}   & The File Spot - A Cloud based File Storage System       \\
 		\hline
-		\textbf{Duration}        & Insert Duration Here                                    \\
+		\textbf{Duration}        & 2 months                                                \\
 		\hline
-		\textbf{Name of Project} & Insert Project Name Here                                \\
+		\textbf{Name of Project} & The Files Spot                                          \\
 		\hline
 		\textbf{Platform}        & Web                                                     \\
 		\hline
@@ -684,8 +685,10 @@ These tests aim to test every aspect of the system and ensure that it matches th
 	\label{table:subscription}
 \end{table}
 \section{Functional and Behavioural Modelling}\label{sec:functional_and_behavioural_modelling}
-\subsection{0-Level Context Diagram}
+\subsection{Level 0 Context Diagram}
 \includegraphics[width=\textwidth]{dfd-L0.png}
+\subsection{Level 1 Context Diagram}
+\includegraphics[width=\textwidth]{dfd-L1.png}
 \section{Gantt Chart}\label{sec:gantt_chart}
 \newpage
 \chapter{Test Cases}\label{cha:test_cases}
