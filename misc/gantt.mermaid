@@ -1,0 +1,19 @@
+%%{init: {'theme':'neutral','layoutDirection':'LR'}}%%
+gantt
+    title Projected and Actual Timelines
+    dateFormat YYYY-MM-DD
+    todaymarker off
+    tickInterval 1month
+    axisFormat %B
+    section Requirement<br>Gathering<br>and Analysis
+        Estimated       : rgae, 2024-07-20, 2024-08-30
+        Another task    : rgaa, 2024-07-20, 2024-09-02
+    section Designing
+        Estimated : after rgae, 14d
+        Actual    : after rgaa, 21d
+    section Coding
+        Estimated: ce, 2024-08-16, 2024-10-30
+        Actual: ca, 2024-08-16, 2024-11-02
+    section Testing
+        Estimated: te, 2024-10-01, 30d
+        Actual: ta, 2024-10-15, 2024-11-10

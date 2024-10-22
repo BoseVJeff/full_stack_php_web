@@ -2,6 +2,7 @@
     "recommendations": [
         "skellock.just",
         "ms-vscode-remote.remote-containers",
-        "jkillian.custom-local-formatters"
+        "jkillian.custom-local-formatters",
+        "bpruitt-goddard.mermaid-markdown-syntax-highlighting"
     ]
 }

@@ -1,5 +1,7 @@
 \documentclass[12pt,a4paper]{report}
 
+\usepackage{float}
+
 % For table of Contents
 \usepackage{multirow}
 \usepackage{tabularx} % For flexible columns in ToC
@@ -259,6 +261,24 @@ I would also like to thank Ms Shraddha Doshi, Ms Rupali Shinde and Ms Darchana M
 \setcounter{page}{1}
 \chapter{SDLC Overview}\label{cha:sdlc_overview}
 \includegraphics{se-sdlc.png}
+\section{Requirement Gathering, Analysis, Definition, and Design}
+A major portion of the requirements were gathered via personal experiences and informal conversation with peers and other people.
+Feedback left on other similar services online was also considered.
+Collected requirements were then analysed and tested for feasablity.
+Requirements deemed unviable (due to time or capabllity) were either rejected or moved to the "possible enhancements" section.
+An example of a feature that was deemed unviable was S3 compatiblity.
+While it did fit into the scope of the project, it was ultimately left out because of the sheer work that such a goal entails.
+
+After the requirements were finalised, a project design was then considered.
+The main goals of this project are simplicity and flexiblity.
+The project design also places these concerns at its core.
+
+The design was approached from two aspects - standard users (web UI, drag-and-drop) and powerusers (APIs, third-party clients).
+For standard users, a simple and intuitive web UI is included.
+For powerusers, we ensure that all equivalent functionality is also available via an API.
+
+\section{Coding, Testing}
+
 \newpage
 \chapter{Requirement Gathering and Analysis}\label{sec:requirement_gathering_and_analysis}
 \section{Organization Details}\label{sec:organization_details}
@@ -270,13 +290,15 @@ This service was made to fulfill part of the requirements for BCA III semester.
 	      Bachelor of Computer Applications, School of Engineering and Technology, Navarachna University, Vadodara
 
 	\item \textbf{Brief Details of Organization}
-	      The School of Engineering and Technology, Navrachna University is a place where students are taught deatils of various technical fields.
+	      The School of Engineering and Technology, Navrachna University is a place where students are taught details of various technical fields.
 \end{itemize}
 
 \section{Meetings}\label{sec:meetings}
-Meetings with Ms Shraddha Doshi revealed valuable insights into the structre and contents of this document.
+Meetings with Shraddha Mam revealed valuable insights into the structre and contents of this document.
 
-Meetings with Ms Darshana Makani were crucial in finalising the functionality of the system made as a part of this project.
+Meetings with Darshana Mam were crucial in finalising the functionality of the system made as a part of this project.
+
+Rupali Mam's input helped shape the deployment story for this project.
 \section{Data which will be Input into the System}\label{sec:data_which_will_be_input_into_system}
 The service, by design, aims to require minimal data from the user. Aside from the username/password combo, only files themselves are the only other major form of data that most users are expected to input into the system.
 
@@ -690,9 +712,45 @@ These tests aim to test every aspect of the system and ensure that it matches th
 \section{Functional and Behavioural Modelling}\label{sec:functional_and_behavioural_modelling}
 \subsection{Level 0 Context Diagram}
 \includegraphics[width=\textwidth]{dfd-L0.png}
-\subsection{Level 1 Context Diagram}
+\subsection{Level 1 Data Flow Diagram}
 \includegraphics[width=\textwidth]{dfd-L1.png}
+\subsection{Level 2 Data Flow Diagrams}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{dfd-L2-create_user.png}
+	\caption{User Signup}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{dfd-L2-request_token.png}
+	\caption{Request Client Token}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{dfd-L2-delete_account.png}
+	\caption{Delete User Account}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{dfd-L2-purchase_subscription.png}
+	\caption{Purchase Subscription}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{dfd-L2-status_subscription.png}
+	\caption{Query Subscription Status}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{dfd-L2-cancel_subscription.png}
+	\caption{Cancel Subscription}
+\end{figure}
+
 \section{Gantt Chart}\label{sec:gantt_chart}
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{gantt.png}
+\end{figure}
+
 \newpage
 \chapter{Test Cases}\label{cha:test_cases}
 \newpage

@@ -1,0 +1,25 @@
+{
+  "name": "full_stack_php_web",
+  "version": "1.0.0",
+  "description": "This project exists to fulfill academic requirements.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BoseVJeff/full_stack_php_web.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BoseVJeff/full_stack_php_web/issues"
+  },
+  "homepage": "https://github.com/BoseVJeff/full_stack_php_web#readme",
+  "dependencies": {
+    "@mermaid-js/mermaid-cli": "^11.2.1"
+  }
+}
