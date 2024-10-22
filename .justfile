@@ -4,6 +4,7 @@ default:
     just --list
 
 build-abstract:
+    .\node_modules\.bin\mmdc -i .\misc\gantt.mermaid -o .\assets\gantt.png -b white
     pdflatex -aux-directory=docs/latex-aux docs/srs.tex --output-directory=docs/
 
 format-tex:
@@ -16,7 +17,7 @@ diff-srs:
 
 start-ldev-server:
     echo "Starting PHP dev server running at localhost:8008"
-    php -S localhost:8008 -c . -t src
+    php -S localhost:8008 -c . -t public
 
 # TODO:
 # Use `caddy [start|stop|adapt]` for the caddy server, and `php-cgi -b 127.0.0.1:9000 -c .\php.ini` in a background job (using https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_jobs?view=powershell-7.4) for a full prod-ish setup.
