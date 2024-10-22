@@ -1,6 +1,9 @@
 \documentclass[12pt,a4paper]{report}
 
+% For Image placement, esp. when there are multiple in a row
 \usepackage{float}
+
+\usepackage[english]{babel}
 
 % For table of Contents
 \usepackage{multirow}
@@ -201,57 +204,60 @@ I would also like to thank Ms Shraddha Doshi, Ms Rupali Shinde and Ms Darchana M
 }
 \begin{tabularx}{\textwidth}{|c|X|c|}
 	\hline
-	\uppercase{Sr. No.} & \centerline{\uppercase{Title}}                                  & \uppercase{Page No.}                                \\
+	\uppercase{Sr. No.} & \centerline{\uppercase{Title}}                                                & \uppercase{Page No.}                                \\
 	\hline
-	1                   & \uppercase{SDLC Overview}                                       & \pageref{cha:sdlc_overview}                         \\
+	\multirow{4}{*}{1}  & \uppercase{SDLC Overview}                                                     & \pageref{cha:sdlc_overview}                         \\
+	                    & \quad \quad \quad 1.1 Requirement Gathering, Analysis, Definition, and Design & \pageref{sec:req}                                   \\
 	\hline
-	\multirow{7}{*}{2}  & \uppercase{Requirement Gathering and Analysis}                  & \pageref{sec:requirement_gathering_and_analysis}    \\
-	\cline{2-3}
-	                    & \quad \quad \quad 2.1 Organization Details                      & \pageref{sec:organization_details}                  \\
-	\cline{2-3}
-	                    & \quad \quad \quad 2.2 Meetings                                  & \pageref{sec:meetings}                              \\
-	\cline{2-3}
-	                    & \quad \quad \quad 2.3 Data which will be Input into the System  & \pageref{sec:data_which_will_be_input_into_system}  \\
-	\cline{2-3}
-	                    & \quad \quad \quad 2.4 Data which will be Output from the System & \pageref{sec:data_which_will_be_output_from_system} \\
-	\cline{2-3}
-	                    & \quad \quad \quad 2.5 Type of Project                           & \pageref{sec:type_of_project}                       \\
-	\cline{2-3}
-	                    & \quad \quad \quad 2.6 Method of Collecting Data                 & \pageref{sec:method_of_collecting_data}             \\
+	                    & \quad \quad \quad 1.2 Implementation, Testing                                 & \pageref{sec:impl}                                  \\
 	\hline
-	\multirow{6}{*}{3}  & \uppercase{System Requirement Specifications}                   & \pageref{cha:system_requirement_specifications}     \\
-	\cline{2-3}
-	                    & \quad \quad \quad 3.1 Introduction                              & \pageref{sec:introduction}                          \\
-	\cline{2-3}
-	                    & \quad \quad \quad 3.2 Overall Description                       & \pageref{sec:overall_description}                   \\
-	\cline{2-3}
-	                    & \quad \quad \quad 3.3 System Features                           & \pageref{sec:system_features}                       \\
-	\cline{2-3}
-	                    & \quad \quad \quad 3.4 External Interface Requirements           & \pageref{sec:external_interface_requirements}       \\
-	\cline{2-3}
-	                    & \quad \quad \quad 3.5 Other Non-Functional Requirements         & \pageref{sec:other_non_functional_requirements}     \\
+	                    & \quad \quad \quad 1.3 Gantt Chart                                             & \pageref{sec:gantt}                                 \\
 	\hline
-	\multirow{6}{*}{4}  & \uppercase{System Analysis and Modelling}                       & \pageref{cha:system_analysis_and_modelling}         \\
+	\multirow{7}{*}{2}  & \uppercase{Requirement Gathering and Analysis}                                & \pageref{sec:requirement_gathering_and_analysis}    \\
 	\cline{2-3}
-	                    & \quad \quad \quad 4.1 Use Case Diagram                          & \pageref{sec:use_case_diagram}                      \\
+	                    & \quad \quad \quad 2.1 Organization Details                                    & \pageref{sec:organization_details}                  \\
 	\cline{2-3}
-	                    & \quad \quad \quad 4.2 ER Diagram                                & \pageref{sec:normalisation_and_er_diagram}          \\
+	                    & \quad \quad \quad 2.2 Meetings                                                & \pageref{sec:meetings}                              \\
 	\cline{2-3}
-	                    & \quad \quad \quad 4.3 Data Dictionary                           & \pageref{sec:data_dictionary}                       \\
+	                    & \quad \quad \quad 2.3 Data which will be Input into the System                & \pageref{sec:data_which_will_be_input_into_system}  \\
 	\cline{2-3}
-	                    & \quad \quad \quad 4.4 Functional and Behaviour Modelling        & \pageref{sec:functional_and_behavioural_modelling}  \\
+	                    & \quad \quad \quad 2.4 Data which will be Output from the System               & \pageref{sec:data_which_will_be_output_from_system} \\
 	\cline{2-3}
-	                    & \quad \quad \quad 4.5 Gantt Chart                               & \pageref{sec:gantt_chart}                           \\
+	                    & \quad \quad \quad 2.5 Type of Project                                         & \pageref{sec:type_of_project}                       \\
+	\cline{2-3}
+	                    & \quad \quad \quad 2.6 Method of Collecting Data                               & \pageref{sec:method_of_collecting_data}             \\
 	\hline
-	5                   & \uppercase{Test Cases}                                          & \pageref{cha:test_cases}                            \\
+	\multirow{6}{*}{3}  & \uppercase{System Requirement Specifications}                                 & \pageref{cha:system_requirement_specifications}     \\
+	\cline{2-3}
+	                    & \quad \quad \quad 3.1 Introduction                                            & \pageref{sec:introduction}                          \\
+	\cline{2-3}
+	                    & \quad \quad \quad 3.2 Overall Description                                     & \pageref{sec:overall_description}                   \\
+	\cline{2-3}
+	                    & \quad \quad \quad 3.3 System Features                                         & \pageref{sec:system_features}                       \\
+	\cline{2-3}
+	                    & \quad \quad \quad 3.4 External Interface Requirements                         & \pageref{sec:external_interface_requirements}       \\
+	\cline{2-3}
+	                    & \quad \quad \quad 3.5 Other Non-Functional Requirements                       & \pageref{sec:other_non_functional_requirements}     \\
 	\hline
-	6                   & \uppercase{Screenshots}                                         & \pageref{cha:screenshots}                           \\
+	\multirow{6}{*}{4}  & \uppercase{System Analysis and Modelling}                                     & \pageref{cha:system_analysis_and_modelling}         \\
+	\cline{2-3}
+	                    & \quad \quad \quad 4.1 Use Case Diagram                                        & \pageref{sec:use_case_diagram}                      \\
+	\cline{2-3}
+	                    & \quad \quad \quad 4.2 ER Diagram                                              & \pageref{sec:normalisation_and_er_diagram}          \\
+	\cline{2-3}
+	                    & \quad \quad \quad 4.3 Data Dictionary                                         & \pageref{sec:data_dictionary}                       \\
+	\cline{2-3}
+	                    & \quad \quad \quad 4.4 Functional and Behaviour Modelling                      & \pageref{sec:functional_and_behavioural_modelling}  \\
+	\cline{2-3}
+	5                   & \uppercase{Test Cases}                                                        & \pageref{cha:test_cases}                            \\
 	\hline
-	7                   & \uppercase{Limitations and Future Enhancements}                 & \pageref{cha:limitations_and_future_enhancements}   \\
+	6                   & \uppercase{Screenshots}                                                       & \pageref{cha:screenshots}                           \\
 	\hline
-	8                   & \uppercase{Conclusion}                                          & \pageref{cha:conclusion}                            \\
+	7                   & \uppercase{Limitations and Future Enhancements}                               & \pageref{cha:limitations_and_future_enhancements}   \\
 	\hline
-	9                   & \uppercase{References and Bibilography}                         & \pageref{cha:references_and_bibilography}           \\
+	8                   & \uppercase{Conclusion}                                                        & \pageref{cha:conclusion}                            \\
+	\hline
+	9                   & \uppercase{References and Bibilography}                                       & \pageref{cha:references_and_bibilography}           \\
 	\hline
 \end{tabularx}
 % \normalsize
@@ -261,7 +267,7 @@ I would also like to thank Ms Shraddha Doshi, Ms Rupali Shinde and Ms Darchana M
 \setcounter{page}{1}
 \chapter{SDLC Overview}\label{cha:sdlc_overview}
 \includegraphics{se-sdlc.png}
-\section{Requirement Gathering, Analysis, Definition, and Design}
+\section{Requirement Gathering, Analysis, Definition, and Design}\label{sec:req}
 A major portion of the requirements were gathered via personal experiences and informal conversation with peers and other people.
 Feedback left on other similar services online was also considered.
 Collected requirements were then analysed and tested for feasablity.
@@ -277,7 +283,18 @@ The design was approached from two aspects - standard users (web UI, drag-and-dr
 For standard users, a simple and intuitive web UI is included.
 For powerusers, we ensure that all equivalent functionality is also available via an API.
 
-\section{Coding, Testing}
+\section{Implementation, Testing}\label{sec:impl}
+Implementation of this project started even before the design itself was finalised.
+It was done in this manner so that the analysis and design phase could take advantage of the knowledge and experience gained during the actual implementation.
+
+After the initial implementation was completed, tests were also set up.
+At this stage, these were just unit tests.
+As the implementation progressed, so did teh level of test coverage in this project.
+
+\section{Gantt Chart}\label{sec:gantt}
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{gantt.png}
+\end{figure}
 
 \newpage
 \chapter{Requirement Gathering and Analysis}\label{sec:requirement_gathering_and_analysis}
@@ -574,7 +591,7 @@ The suer must therefore employ other file integrity checks of their own (prefera
 \subsection{Software Quality Attributes}
 Software quality is upheld by employing a series of tests, both automated and manual.
 These tests aim to test every aspect of the system and ensure that it matches the expectatons defined in this document.
-\section{Other Requirements}
+% \section{Other Requirements}
 \newpage
 \chapter{System Analysis and Modelling}\label{cha:system_analysis_and_modelling}
 \section{Use case Diagram}\label{sec:use_case_diagram}
@@ -746,19 +763,54 @@ These tests aim to test every aspect of the system and ensure that it matches th
 	\caption{Cancel Subscription}
 \end{figure}
 
-\section{Gantt Chart}\label{sec:gantt_chart}
-\begin{figure}[H]
-	\includegraphics[width=\textwidth]{gantt.png}
-\end{figure}
-
 \newpage
 \chapter{Test Cases}\label{cha:test_cases}
+% \begin{hyphenrules}{nohyphenation}
+\begin{table}[H]
+	\raggedright
+	\centering
+	\caption{User Login}
+	\begin{tabular}{|p{0.33\textwidth}|p{0.33\textwidth}|p{0.33\textwidth}|}
+		\hline
+		Action                               & Expected Response                      & Actual Response                        \\
+		\hline
+		Username and Password correct        & Redirect user to dashboard             & Redirect user to dashboard             \\
+		\hline
+		Username incorrect, Password correct & Error - Incorrect username or password & Error - Incorrect username or password \\
+		\hline
+		Username correct, Password incorrect & Error - Incorrect username or password & Error - Incorrect username or password \\
+		\hline
+	\end{tabular}
+\end{table}
+% \end{hyphenrules}
 \newpage
 \chapter{Screenshots}\label{cha:screenshots}
 \newpage
 \chapter{Limitations and Future Enhancements}\label{cha:limitations_and_future_enhancements}
+One major limitation of this software is its dependency on the underlying system, making it more difficult to deploy on production servers.
+Unlike some other modern systems that ship as a single binary, this software ships as a set of files that must be copied over to the server.
+Additionally, said server also needs to be setup with the tools needed to get a typical PHP server running.
+
+Another limitation of this software is its dependency on MySQL as its backend database.
+This usually requires running MySQL as either a seperate process on the same server, or on a different server altogether.
+This can result in increased server costs.
+
+The server currently makes no attempt to identify potentially illegal content.
+Currently, it is the responsiblity of the server admin to ensure that no illegal content is being hosted on this service.
+But, in the future, system could be added to this service that filters out benign files and surfaces only the potentially problematic ones to the admin.
+This would serve to reduce the admin's workload.
+
+The central feature of this server is the level of access it provides via its API.
+Unfortunately, this level of access also leaves it more vulnerable to bots.
+For now, this service makes no attempt to identify if a user is a bot and instead, leaves it to the proxy server that will be running behind.
+
+In the future, work could be done to ensure that this service's API is S3 compatible.
+As a \textit{de facto} standard, a wide variety of applications support it.
+Therefore, S3 compatiblity could make it even easier to support existing backup workflows.
 \newpage
 \chapter{Conclusion}\label{cha:conclusion}
+The Files Spot is a web-based file hosting service that aims to be simple and easy to use.
+It is aimed squarely at powerusers and other users who want more control over their file shares and backups.
 \newpage
 \chapter{References and Bibilography}\label{cha:references_and_bibilography}
 \end{document}
