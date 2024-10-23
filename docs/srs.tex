@@ -3,7 +3,9 @@
 % For Image placement, esp. when there are multiple in a row
 \usepackage{float}
 
-\usepackage[english]{babel}
+\usepackage{fancyhdr}
+
+\usepackage{lastpage}
 
 % For table of Contents
 \usepackage{multirow}
@@ -39,10 +41,12 @@
 \usepackage{titlesec}
 \titleformat{\chapter}{\large\bfseries\centering}{}{1em}{\MakeUppercase}[\hrule]
 \titleformat{\section}{\large\bfseries\centering}{}{1em}{}
-% \titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\bfseries}{}{1em}{}
 
 % Setting ToC heading
 \renewcommand*{\contentsname}{\uppercase{Index}}
+
+\fancypagestyle{plain}{\fancyhead{}\renewcommand{\headrule}{}}
 
 \usepackage{tocloft}
 \renewcommand{\cftdot}{}
@@ -69,6 +73,7 @@
 
 \begin{document}
 \newpagecolor{black}\afterpage{\restorepagecolor}
+\thispagestyle{plain}
 \begin{titlepage}
 	\onehalfspacing
 	\setlength{\baselineskip}{18pt}
@@ -115,6 +120,7 @@
 	\end{center}
 \end{titlepage}
 \newpage
+\thispagestyle{plain}
 \onehalfspacing
 \setlength{\baselineskip}{18pt}
 \pagenumbering{gobble}
@@ -161,6 +167,14 @@
 \newpage
 \pagenumbering{roman}
 \setcounter{page}{1}
+\pagestyle{fancy}
+\setlength{\headheight}{15pt}
+\fancyhead[]{}
+\fancyfoot[]{}
+\fancyhead[L]{Enrollment No.: 23000068}
+\fancyhead[C]{The Files Spot}
+\fancyfoot[L]{Navarachna University}
+\fancyfoot[C]{Page \thepage\ of \pageref{LastPage}}
 \chapter*{Abstract}
 This project represents the design and development of \textit{The Files Spot}, a file hosting and sharing service. It is aimed squarely at users who want more powerful functionality than what the existing file upload services provide. It leverages a flexible, web-based architecture to ensure that the service is available on whatever platform the user is on. The backend service is written in PHP and serves a basic HTML/CSS/JS frontend. The main features of this service include a very lightweight and responsive frontend for casual use and a flexible JSON API for those who want more control over their file management workflows.
 \newpage
@@ -210,6 +224,7 @@ I would also like to thank Ms Shraddha Doshi, Ms Rupali Shinde and Ms Darchana M
 		($ (current page.south east) + (-1.1cm,1.1cm) $);
 	\end{tikzpicture}
 }
+\thispagestyle{plain}
 \begin{tabularx}{\textwidth}{|c|X|c|}
 	\hline
 	\uppercase{Sr. No.} & \centerline{\uppercase{Title}}                                                & \uppercase{Page No.}                                \\
@@ -603,7 +618,10 @@ These tests aim to test every aspect of the system and ensure that it matches th
 \newpage
 \chapter{System Analysis and Modelling}\label{cha:system_analysis_and_modelling}
 \section{Use case Diagram}\label{sec:use_case_diagram}
-\includegraphics[width=\textwidth]{use-case.png}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{use-case.png}
+\end{figure}
 \section{E-R Diagram}\label{sec:normalisation_and_er_diagram}
 \includegraphics[width=\textwidth]{erd.png}
 \section{Data Dictionary}\label{sec:data_dictionary}
