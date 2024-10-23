@@ -3,8 +3,10 @@ set windows-shell:=["pwsh.exe","-c"]
 default:
     just --list
 
-build-abstract:
-    .\node_modules\.bin\mmdc -i .\misc\gantt.mermaid -o .\assets\gantt.png -b white
+build-gantt:
+    .\node_modules\.bin\mmdc -i .\misc\gantt.mermaid -c ./misc/mermaid-config.json --cssFile ./misc/mermaid-style.css -o .\assets\gantt.png -b white
+
+build-abstract: build-gantt
     pdflatex -aux-directory=docs/latex-aux docs/srs.tex --output-directory=docs/
 
 format-tex:

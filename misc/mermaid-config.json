@@ -1,0 +1,9 @@
+{
+    "theme": "neutral",
+    "layoutDirection": "LR",
+    "gantt": {
+        "bottomAxis": false,
+        "leftPadding": 90,
+        "numberSectionStyles": 2
+    }
+}
