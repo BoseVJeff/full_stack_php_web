@@ -4,8 +4,9 @@
 \usepackage{float}
 
 \usepackage{fancyhdr}
-
 \usepackage{lastpage}
+
+\usepackage{tabularray}
 
 % For table of Contents
 \usepackage{multirow}
@@ -476,7 +477,7 @@ The information for each endpoint is defined as follows:
 		            If the file does not exist, a HTTP \texttt{404} status code is returned instead.
 		            \texttt{<start-offset>} is clamped to the file size, with a default value of 0.
 		            \texttt{<end-offset>} is also clamped to the file size, with a default value of \texttt{file-size}.
-		            If \texttt{<start-offset>} > \texttt{<end-offset>}, an error with HTTP status \texttt{400 Bad Request} is returned.
+		            If $\texttt{<start-offset>} > \texttt{<end-offset>}$, an error with HTTP status \texttt{400 Bad Request} is returned.
 
 		      \item \texttt{PATCH}
 
@@ -779,6 +780,44 @@ These tests aim to test every aspect of the system and ensure that it matches th
 		\hline
 	\end{tabular}
 \end{table}
+% \begin{table}[H]
+\begin{longtblr}[
+	caption={File Access}
+	]{
+	colspec = {|X[c]|X[c]|X[c]|X[c]|},
+	width = \textwidth,
+	rowhead = 1,
+	}
+	% \raggedright
+	% \centering
+	% \caption{File Access}
+	% \begin{tabular}{|p{0.25\textwidth}|p{0.25\textwidth}|p{0.25\textwidth}|p{0.25\textwidth}|}
+	\hline
+	API                                         & Action                                                                                                                                                                     & Expected Response                                                                                         & Actual Response                                                                                           \\
+	\hline
+	\SetCell[r=4]{c} \texttt{/api/files/<file>} & [GET] \texttt{<file>} does not exist                                                                                                                                       & HTTP 404 Not Found                                                                                        & HTTP 404                                                                                                  \\
+	\hline
+	                                            & [GET] \texttt{<file>} exists, user credentials invalid or missing                                                                                                          & HTTP 401 Unauthorized                                                                                     & HTTP 401 Unauthorized                                                                                     \\
+	\hline
+	                                            & [GET] \texttt{<file>} exists, user credentials valid, user not allowed to access file                                                                                      & HTTP 401 Unauthorized                                                                                     & HTTP 401 Unauthorized                                                                                     \\
+	\hline
+	                                            & [GET] \texttt{<file>} exists, user credentials valid, user allowed to access file, \texttt{Range} header not set                                                           & HTTP 200 OK, with the entire file in response body                                                        & HTTP 200 OK, with the entire file in response body                                                        \\
+	\hline
+	\SetCell[r=4]{c} \texttt{/api/files/<file>} & [GET] \texttt{<file>} exists, user credentials valid, user allowed to access file, \texttt{Range} header set to an invalid value                                           & HTTP 400 Bad Request                                                                                      & HTTP 400 Bad Request                                                                                      \\
+	\hline
+	                                            & [GET] \texttt{<file>} exists, user credentials valid, user allowed to access file, \texttt{Range} header set with $\texttt{start}<=0$, \texttt{end} unspecified or invalid & HTTP 206 Partial Content, with the entire file in response body                                           & HTTP 206 Partial Content, with the entire file in response body                                           \\
+	\hline
+	                                            & [GET] \texttt{<file>} exists, user credentials valid, user allowed to access file, \texttt{Range} header set with $\texttt{start}>0$, \texttt{end} unspecified or invalid  & HTTP 206 Partial Content, with file data starting from offset \texttt{<start>} to the end of the file     & HTTP 206 Partial Content, with file data starting from offset \texttt{<start>} to the end of the file     \\
+	\hline
+	                                            & [GET] \texttt{<file>} exists, user credentials valid, user allowed to access file, \texttt{Range} header set with $\texttt{start} > \texttt{end}$                          & HTTP 206 Partial Content, with file data starting from offset \texttt{<start>} to the end of the file     & HTTP 206 Partial Content, with file data starting from offset \texttt{<start>} to the end of the file     \\
+	\hline
+	\SetCell[r=2]{c} \texttt{/api/files/<file>} & [GET] \texttt{<file>} exists, user credentials valid, user allowed to access file, \texttt{Range} header set with $\texttt{start}>0, \texttt{end}>=\texttt{<file-size>}$   & HTTP 206 Partial Content, with file data starting from offset \texttt{<start>} to the end of the file     & HTTP 206 Partial Content, with file data starting from offset \texttt{<start>} to the end of the file     \\
+	\hline
+	                                            & [GET] \texttt{<file>} exists, user credentials valid, user allowed to access file, \texttt{Range} header set with $\texttt{start}>0, \texttt{end}<\texttt{<file-size>}$    & HTTP 206 Partial Content, with file data starting from offset \texttt{<start>} to the offset \texttt{end} & HTTP 206 Partial Content, with file data starting from offset \texttt{<start>} to the offset \texttt{end} \\
+	\hline
+	% \end{tabular}
+\end{longtblr}
+% \end{table}
 % \end{hyphenrules}
 \newpage
 \chapter{Screenshots}\label{cha:screenshots}
@@ -814,4 +853,12 @@ The Files Spot is a web-based file hosting service that aims to be simple and ea
 It is aimed squarely at powerusers and other users who want more control over their file shares and backups.
 \newpage
 \chapter{References and Bibilography}\label{cha:references_and_bibilography}
+\begin{enumerate}
+	\item https://developer.mozilla.org/en-US/docs/Web/HTTP
+	\item https://www.php.net/
+	\item https://phptherightway.com/
+	\item https://stackoverflow.com/
+	\item https://tex.stackexchange.com/
+	\item https://www.overleaf.com/
+\end{enumerate}
 \end{document}
