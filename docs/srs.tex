@@ -456,7 +456,6 @@ The web client aims to follow the principles of progressive enhancement. As a pa
 Another design decision to not use any large external libraries. This means that we mostly avoid large CSS libraries like Bootstrap. Instead, we opt for custom, minimal CSS and JS to power the site.
 
 On the server side, the decision to avoid JS frameworks means that we need a language which can stringly augment the existing HTML instead of generating a new one everytime one is requested. This leaves us with two major, battle-tested options - Python (via Jinja2 templates in Django/Flask), or PHP. Here, we opt for PHP as it is a lighter, much simpler language to make a web server in. Additionally, PHP comes with a lot of server utilities built in (database methods, etc) which removes the need for many external dependencies.
-\subsection{User Documentation}
 \subsection{Assumption and Dependencies}
 On the server side, the server requires the presence of a PHP runtime on the system. Additionally, the server requires access to a MySQL instance (either locally or on a seperate server) to serve as the application database.
 
@@ -914,6 +913,10 @@ One major limitation of this software is its dependency on the underlying system
 Unlike some other modern systems that ship as a single binary, this software ships as a set of files that must be copied over to the server.
 Additionally, said server also needs to be setup with the tools needed to get a typical PHP server running.
 
+Currently, all server administration is expected to be done by the systems administrator as a part of their regular sysadmin responsiblities.
+Since this runs contrary to normal user expectations for such a service, a case could be made for having an explicit \textit{admin} user role.
+In general, it could be a good idea to add user roles in the future, with associated permissions.
+
 Another limitation of this software is its dependency on MySQL as its backend database.
 This usually requires running MySQL as either a seperate process on the same server, or on a different server altogether.
 This can result in increased server costs.
@@ -938,10 +941,12 @@ It is aimed squarely at powerusers and other users who want more control over th
 \chapter{References and Bibilography}\label{cha:references_and_bibilography}
 \begin{enumerate}
 	\item https://developer.mozilla.org/en-US/docs/Web/HTTP
+	\item https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
 	\item https://www.php.net/
 	\item https://phptherightway.com/
 	\item https://stackoverflow.com/
 	\item https://tex.stackexchange.com/
 	\item https://www.overleaf.com/
+	\item https://caddyserver.com/
 \end{enumerate}
 \end{document}
