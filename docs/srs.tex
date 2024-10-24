@@ -41,8 +41,8 @@
 % Use `\theX` (X=chapter,section,etc) the get the chapter/section/etc number
 \usepackage{titlesec}
 \titleformat{\chapter}{\large\bfseries\centering}{}{1em}{\MakeUppercase}[\hrule]
-\titleformat{\section}{\large\bfseries\centering}{}{1em}{}
-\titleformat{\subsection}{\bfseries}{}{1em}{}
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\bfseries}{\thesubsection}{1em}{}
 
 % Setting ToC heading
 \renewcommand*{\contentsname}{\uppercase{Index}}
@@ -231,6 +231,7 @@ I would also like to thank Ms Shraddha Doshi, Ms Rupali Shinde and Ms Darchana M
 	\uppercase{Sr. No.} & \centerline{\uppercase{Title}}                                                & \uppercase{Page No.}                                \\
 	\hline
 	\multirow{4}{*}{1}  & \uppercase{SDLC Overview}                                                     & \pageref{cha:sdlc_overview}                         \\
+	\hline
 	                    & \quad \quad \quad 1.1 Requirement Gathering, Analysis, Definition, and Design & \pageref{sec:req}                                   \\
 	\hline
 	                    & \quad \quad \quad 1.2 Implementation, Testing                                 & \pageref{sec:impl}                                  \\
@@ -297,7 +298,7 @@ Feedback left on other similar services online was also considered.
 Collected requirements were then analysed and tested for feasablity.
 Requirements deemed unviable (due to time or capabllity) were either rejected or moved to the "possible enhancements" section.
 An example of a feature that was deemed unviable was S3 compatiblity.
-While it did fit into the scope of the project, it was ultimately left out because of the sheer work that such a goal entails.
+While it did fit into the scope of the project, it was ultimately left out because of the sheer amount of work that would be required.
 
 After the requirements were finalised, a project design was then considered.
 The main goals of this project are simplicity and flexiblity.
@@ -311,14 +312,22 @@ For powerusers, we ensure that all equivalent functionality is also available vi
 Implementation of this project started even before the design itself was finalised.
 It was done in this manner so that the analysis and design phase could take advantage of the knowledge and experience gained during the actual implementation.
 
-After the initial implementation was completed, tests were also set up.
-At this stage, these were just unit tests.
+After the initial implementation was completed, test scaffolds were also set up.
+At this initial stage, these consisted just unit tests.
 As the implementation progressed, so did teh level of test coverage in this project.
 
-\section{Gantt Chart}\label{sec:gantt}
+\section{Project Timeline}\label{sec:gantt}
 \begin{figure}[H]
 	\includegraphics[width=\textwidth]{gantt.png}
 \end{figure}
+
+As can be seen from the above Gantt chart, a lot of project timeline was devoted to the planning and implementation.
+There is also a lot of overlap for each task.
+This was done in order to overcome the disadvantages of a traditional Waterfall model.
+
+In a traditional Waterfall model, there is little-to-no feedback between each phase.
+For a project as developer-centric as this, such rigidity is unadvisable.
+Therefore, some overlap was planned so that mistakes made in the earlier phase of development can be corrected.
 
 \newpage
 \chapter{Requirement Gathering and Analysis}\label{sec:requirement_gathering_and_analysis}
