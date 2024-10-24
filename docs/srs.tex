@@ -542,6 +542,7 @@ The information for each endpoint is defined as follows:
 	      This aims to make it more difficult for a malicious client to take over other tokens.
 
 	      The remainder of this section assumes that requests are being made by an authenticated client.
+	      All unauthenticated clients will recieve a \texttt{HTTP 401 Unauthorized} response.
 
 	      \begin{itemize}
 		      \item \texttt{GET}
@@ -558,7 +559,7 @@ The information for each endpoint is defined as follows:
 
 		      \item \texttt{PATCH}
 
-		            Update the config with the new values.
+		            Update the config with the new values supplied.
 
 		            Note that the rest of the config is left unchanged.
 
@@ -566,8 +567,22 @@ The information for each endpoint is defined as follows:
 
 		            Delete the user config.
 
-		            Note that the system cannot ever delete a token without deleting the corresponding user.
+		            Note that the system cannot delete a user's config without deleting the user itself.
 		            Therefore, this action simply has the effect of resetting values back to default wherever possible.
+	      \end{itemize}
+
+	\item \texttt{/api/user}
+
+	      This is the basic user endpoint.
+	      All attempts to access this endpoint with an unauthenticated client will result in a \texttt{HTTP 401 Unauthorized} error.
+
+	      \begin{itemize}
+		      \item \texttt{DELETE}
+
+		            Deletes the account associated with the client.
+		            Note that this is a destructive action and cannot be reversed.
+
+		            All files and user tokens associated with this account are permanently deleted.
 	      \end{itemize}
 \end{itemize}
 
