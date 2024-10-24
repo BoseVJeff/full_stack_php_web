@@ -24,7 +24,6 @@ diff-srs:
     pdflatex -aux-directory=docs/latex-aux docs/diff.tex --output-directory=docs/
 
 start-ldev-server:
-    echo "Starting PHP dev server running at localhost:8008"
     php -S localhost:8008 -c . -t public
 
 # TODO:
