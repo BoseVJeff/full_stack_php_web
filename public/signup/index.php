@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Sign Up</title>
     <link rel="stylesheet" href="../styles/base.css">
     <?php
     include "../../src/utils/meta_head.php";
@@ -57,7 +57,7 @@
             backdrop-filter: blur(10px);
         }
 
-        form>input[type=submit] {
+        form>input[type=reset] {
             margin-block-start: 1rem;
         }
     </style>
@@ -66,15 +66,18 @@
 <body>
     <form action="#" method="get" id="login-form">
         <label for="username">Username</label>
-        <input type="text" id="username">
+        <input type="text" id="username" name="username" autocomplete="username" required>
 
         <label for="password">Password</label>
-        <input type="password" id="password" autocomplete="current-password">
+        <input type="password" id="password" name="password" autocomplete="new-password" required>
 
-        <input type="submit" value="Login">
+        <label for="email">Email</label>
+        <input type="email" id="email" autocomplete="email">
+
         <input type="reset" value="Reset">
+        <input type="submit" value="Sign Up">
 
-        <span>Don't have an account! <a href="/signup">Sign Up</a></span>
+
     </form>
 </body>
 

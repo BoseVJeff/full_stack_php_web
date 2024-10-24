@@ -26,3 +26,39 @@ body {
     height: 100%;
     font-family: "Inter", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+input {
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    transition-property: box-shadow;
+    transition-duration: 100ms;
+}
+
+input:hover {
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+input:focus {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+input[type=text],
+input[type=email],
+input[type=password] {
+    width: 16rem;
+    padding: 0.125rem;
+    padding-inline: 0.5rem;
+    border-radius: 0.25rem;
+    /* border-slate-500 */
+    border: 1px solid rgb(100 116 139);
+}
+
+input[type=submit],
+input[type=reset],
+input[type=button] {
+    width: 16rem;
+    padding: 0.125rem;
+    padding-inline: 0.5rem;
+    border-radius: 0.25rem;
+    /* border-slate-500 */
+    border: 1px solid rgb(100 116 139);
+}

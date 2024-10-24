@@ -1,5 +1,11 @@
 set windows-shell:=["pwsh.exe","-c"]
 
+export DB_URI:="mysql:host=localhost:3305;dbname=the_files_spot"
+export DB_USER:="root"
+export DB_PASS:="vineet"
+
+phpunit_version:="11"
+
 default:
     just --list
 
@@ -30,5 +36,11 @@ setup-composer:
     php -c . -t src composer-setup.php
     php -c . -t src -r "unlink('composer-setup.php');"
 
+setup-phpunit:
+    Invoke-WebRequest 'https://phar.phpunit.de/phpunit-{{phpunit_version}}.phar' -OutFile 'phpunit.phar'
+
 do-composer +ccmd="list":
     php -c . composer.phar {{ccmd}}
+
+phpunit +ccmd="--version":
+    php -c . phpunit.phar {{ccmd}}
