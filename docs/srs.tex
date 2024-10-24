@@ -3,6 +3,8 @@
 % For Image placement, esp. when there are multiple in a row
 \usepackage{float}
 
+\usepackage[T1]{fontenc}
+
 \usepackage{fancyhdr}
 \usepackage{lastpage}
 
@@ -102,6 +104,8 @@
 
 		\textbf{\underline{UNDER THE GUIDANCE OF}}
 
+		Mr Dhaval Mehta
+
 		Ms Shraddha Doshi
 
 		Ms Darshana Makani
@@ -147,6 +151,8 @@
 	\vspace{1cm}
 
 	\textbf{\underline{UNDER THE GUIDANCE OF}}
+
+	Mr Dhaval Mehta
 
 	Ms Shraddha Doshi
 
@@ -415,6 +421,16 @@ On the user side, The Files Spot (TFS) is a simple web application that can be a
 
 On the backend, it will be a simple file storage service written in PHP that will manage files for multiple users. It will also allow users to share files - both to specific users or to the public at large. File management will be primarily accomplished via tags set by the user.
 
+The system only has one major module - the \textbf{Files Module}.
+
+This module is responsible for all file handling in the system.
+It is divided into two parts - a database to store all metadata about each file, and a filesystem to store the files themselves.
+The module was designed in this fashion to minimize filesystem access, which speeds up the overall system.
+
+The other two modules in this system are the \textbf{User Module} and the \textbf{Subscription Module}.
+The User Module is responsible for managing authentication and authorization of teh various users.
+Additionally, it combines with the Subscription Module to manage subscription-based perks, like increased storage capacity.
+
 \subsection{Product Perspective}
 \subsection{Product Features}
 The web client is designed to be easy to use for all kinds of people on all kinds of connections. Specific care is taken to ensure that the design is easy to understand and interpret.
@@ -471,6 +487,20 @@ Each endpoint supports some subset of the standard HTTP methods.
 The information for each endpoint is defined as follows:
 
 \begin{itemize}
+	\item \texttt{/api/files/}
+
+	      Note that this endpoint requires an authenticated client.
+	      All unauthenticated clients will recieve a \texttt{HTTP 401 Unauthorized} response.
+
+	      \begin{itemize}
+
+		      \item \texttt{PUT|POST}
+
+		            Uploads the file to the associated user's account.
+
+		            Care must be taken when using this endpoint to submit files, as it will create duplicate entries if the file already exists.
+	      \end{itemize}
+
 	\item \texttt{/api/files/\textsl{<file>}}
 
 	      \begin{itemize}
@@ -488,6 +518,16 @@ The information for each endpoint is defined as follows:
 		            \texttt{<start-offset>} is clamped to the file size, with a default value of 0.
 		            \texttt{<end-offset>} is also clamped to the file size, with a default value of \texttt{file-size}.
 		            If $\texttt{<start-offset>} > \texttt{<end-offset>}$, an error with HTTP status \texttt{400 Bad Request} is returned.
+
+		      \item \texttt{POST}
+
+		            Replaces the current file with the provided file.
+
+		            If a file is not included in the request, a \texttt{HTTP 400 Bad Request} response.
+		            Consider using the \texttt{DELETE} method if the intent was to delete the file instead.
+
+		            This endpoint requires an authenticated client.
+		            All unauthenticated endpoints will recieve a \texttt{HTTP 401 Unauthorized} response.
 
 		      \item \texttt{PATCH}
 
@@ -820,11 +860,11 @@ These tests aim to test every aspect of the system and ensure that it matches th
 	\hline
 	API                                         & Action                                                                                                                                                                     & Expected Response                                                                                         & Actual Response                                                                                           \\
 	\hline
-	\SetCell[r=4]{c} \texttt{/api/files/<file>} & [GET] \texttt{<file>} does not exist                                                                                                                                       & HTTP 404 Not Found                                                                                        & HTTP 404                                                                                                  \\
+	\SetCell[r=4]{c} \texttt{/api/files/<file>} & [GET|POST|PATCH|DELETE] \texttt{<file>} does not exist                                                                                                                     & HTTP 404 Not Found                                                                                        & HTTP 404                                                                                                  \\
 	\hline
-	                                            & [GET] \texttt{<file>} exists, user credentials invalid or missing                                                                                                          & HTTP 401 Unauthorized                                                                                     & HTTP 401 Unauthorized                                                                                     \\
+	                                            & [GET|POST|PATCH|DELETE] \texttt{<file>} exists, user credentials invalid or missing                                                                                        & HTTP 401 Unauthorized                                                                                     & HTTP 401 Unauthorized                                                                                     \\
 	\hline
-	                                            & [GET] \texttt{<file>} exists, user credentials valid, user not allowed to access file                                                                                      & HTTP 401 Unauthorized                                                                                     & HTTP 401 Unauthorized                                                                                     \\
+	                                            & [GET|POST|PATCH|DELETE] \texttt{<file>} exists, user credentials valid, user not allowed to access file                                                                    & HTTP 401 Unauthorized                                                                                     & HTTP 401 Unauthorized                                                                                     \\
 	\hline
 	                                            & [GET] \texttt{<file>} exists, user credentials valid, user allowed to access file, \texttt{Range} header not set                                                           & HTTP 200 OK, with the entire file in response body                                                        & HTTP 200 OK, with the entire file in response body                                                        \\
 	\hline
@@ -840,8 +880,26 @@ These tests aim to test every aspect of the system and ensure that it matches th
 	\hline
 	                                            & [GET] \texttt{<file>} exists, user credentials valid, user allowed to access file, \texttt{Range} header set with $\texttt{start}>0, \texttt{end}<\texttt{<file-size>}$    & HTTP 206 Partial Content, with file data starting from offset \texttt{<start>} to the offset \texttt{end} & HTTP 206 Partial Content, with file data starting from offset \texttt{<start>} to the offset \texttt{end} \\
 	\hline
+	                                            & [POST] File not included in the request                                                                                                                                    & HTTP 206 Partial Content, with file data starting from offset \texttt{<start>} to the offset \texttt{end} & HTTP 206 Partial Content, with file data starting from offset \texttt{<start>} to the offset \texttt{end} \\
+	\hline
+	                                            & [POST] File included in request, \texttt{<file>} already exists                                                                                                            & \texttt{HTTP 200 OK} response, uploaded file replaces the old one                                         & \texttt{HTTP 200 OK} response, uploaded file replaces the old one                                         \\
+	\hline
 	% \end{tabular}
 \end{longtblr}
+
+% \begin{longtblr}[
+% 	caption={User Config}
+% 	]{
+% 	colspec = {|X[c]|X[c]|X[c]|X[c]|},
+% 	width = \textwidth,
+% 	rowhead = 1,
+% 	}
+% 	\hline
+% 	API & Action & Expected Response & Actual Response\\
+
+% 	\hline
+% \end{longtblr}
+
 % \end{table}
 % \end{hyphenrules}
 \newpage
