@@ -1,7 +1,9 @@
 <?php
 require "../../src/api/base.php";
 
-echo "<br>Testing Database connection...";
+header("Content-Type: application/json");
+
+// echo "<br>Testing Database connection...";
 
 // if($conn==null) {
 //     echo "<br>Error connecting to database!";
@@ -13,4 +15,8 @@ echo "<br>Testing Database connection...";
 
 $db=new Database();
 $db=null;
+
+$data=["db_connection"=>"success", "db_dispose"=> "success"];
+
+echo json_encode($data);
 ?>

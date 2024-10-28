@@ -29,3 +29,6 @@ docs/old.tex
 
 # NodeJS
 node_modules
+
+# PHP Upload folder
+uploads
