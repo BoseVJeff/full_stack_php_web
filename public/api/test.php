@@ -1,5 +1,6 @@
 <?php
 require "../../src/api/base.php";
+require "../../src/api/db.php";
 
 header("Content-Type: application/json");
 
