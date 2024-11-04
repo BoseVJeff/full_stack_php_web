@@ -1,9 +1,16 @@
-:2015 {
-	respond "Hello, world!"
-}
-
 :8008 {
-	root src
-	php_fastcgi 127.0.0.1:9000
-	file_server
+    root public
+    
+    @files {
+        path /files/*
+    }
+    handle @files {
+        rewrite * /base_files.php
+        php_fastcgi 127.0.0.1:9000
+    }
+
+    handle {
+        php_fastcgi 127.0.0.1:9000
+        file_server
+    }
 }
