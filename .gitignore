@@ -32,3 +32,4 @@ node_modules
 
 # PHP Upload folder
 uploads
+.phpunit.result.cache

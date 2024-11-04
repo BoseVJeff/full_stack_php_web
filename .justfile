@@ -26,6 +26,14 @@ diff-srs:
 start-ldev-server:
     php -S localhost:8008 -c . -t public
 
+start-caddy-server:
+    caddy start
+    php-cgi -b 127.0.0.1:9000 -c .
+    caddy stop
+
+start-php-cgi:
+    php-cgi -b 127.0.0.1:9000 -c .
+
 # TODO:
 # Use `caddy [start|stop|adapt]` for the caddy server, and `php-cgi -b 127.0.0.1:9000 -c .\php.ini` in a background job (using https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_jobs?view=powershell-7.4) for a full prod-ish setup.
 
@@ -38,8 +46,18 @@ setup-composer:
 setup-phpunit:
     Invoke-WebRequest 'https://phar.phpunit.de/phpunit-{{phpunit_version}}.phar' -OutFile 'phpunit.phar'
 
+setup-phpcs:
+    Invoke-WebRequest 'https://phars.phpcodesniffer.com/phpcs.phar' -OutFile 'phpcs.phar'
+    Invoke-WebRequest 'https://phars.phpcodesniffer.com/phpcbf.phar' -OutFile 'phpcbf.phar'
+
 do-composer +ccmd="list":
     php -c . composer.phar {{ccmd}}
 
 phpunit +ccmd="--version":
     php -c . phpunit.phar {{ccmd}}
+
+phpcs +ccmd="src public":
+    php -c . phpcs.phar {{ccmd}}
+
+phpcbf +ccmd="src public":
+    php -c . phpcbf.phar {{ccmd}}
