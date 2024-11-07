@@ -44,20 +44,32 @@ setup-composer:
     php -c . -t src -r "unlink('composer-setup.php');"
 
 setup-phpunit:
-    Invoke-WebRequest 'https://phar.phpunit.de/phpunit-{{phpunit_version}}.phar' -OutFile 'phpunit.phar'
+    # Invoke-WebRequest 'https://phar.phpunit.de/phpunit-{{phpunit_version}}.phar' -OutFile 'phpunit.phar'
+    just do-composer require --dev phpunit/phpunit ^11
 
 setup-phpcs:
-    Invoke-WebRequest 'https://phars.phpcodesniffer.com/phpcs.phar' -OutFile 'phpcs.phar'
-    Invoke-WebRequest 'https://phars.phpcodesniffer.com/phpcbf.phar' -OutFile 'phpcbf.phar'
+    # Invoke-WebRequest 'https://phars.phpcodesniffer.com/phpcs.phar' -OutFile 'phpcs.phar'
+    # Invoke-WebRequest 'https://phars.phpcodesniffer.com/phpcbf.phar' -OutFile 'phpcbf.phar'
+    just do-composer require --dev squizlabs/php_codesniffer ^3.0"
+
+setup-phan:
+    # Invoke-WebRequest https://github.com/phan/phan/releases/latest/download/phan.phar -OutFile 'phan.phar'
+    just do-composer require --dev "phan/phan:5.x"
+
+setup-deps:
+    just do-composer install
 
 do-composer +ccmd="list":
     php -c . composer.phar {{ccmd}}
 
 phpunit +ccmd="--version":
-    php -c . phpunit.phar {{ccmd}}
+    php -c . ./vendor/bin/phpunit {{ccmd}}
 
 phpcs +ccmd="src public":
-    php -c . phpcs.phar {{ccmd}}
+    php -c . ./vendor/bin/phpcs {{ccmd}}
 
 phpcbf +ccmd="src public":
-    php -c . phpcbf.phar {{ccmd}}
+    php -c . ./vendor/bin/phpcs {{ccmd}}
+
+phan +ccmd="":
+    php -c . ./vendor/bin/phan {{ccmd}}
