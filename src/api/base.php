@@ -58,4 +58,19 @@ class Permission
         return ($this->level) >= ($action_permission->level);
     }
 }
+
+class Token {
+    public string $token;
+    public ?string $label;
+
+    function __construct(string $token, ?string $label) {
+        $this->token=$token;
+        $this->label=$label;
+    }
+
+    public static function generate(?string $label=null):Token {
+        $tok=uniqid("tfs-",false);
+        return new Token($tok,$label);
+    }
+}
 ?>
