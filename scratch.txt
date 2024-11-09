@@ -85,3 +85,16 @@ mysql> DESC file_tag;
 
 Ref ->
 
+mysql> CREATE TABLE file_access (file_id INT NOT NULL, user_id INT NOT NULL, access INT NOT NULL DEFAULT 0, FOREIGN KEY
+(file_id) REFERENCES file(id) ON DELETE CASCADE, FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE);
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> DESC file_access;
++---------+------+------+-----+---------+-------+
+| Field   | Type | Null | Key | Default | Extra |
++---------+------+------+-----+---------+-------+
+| file_id | int  | NO   | MUL | NULL    |       |
+| user_id | int  | NO   | MUL | NULL    |       |
+| access  | int  | NO   |     | 0       |       |
++---------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
