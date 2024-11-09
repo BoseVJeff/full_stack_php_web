@@ -1,10 +1,9 @@
-set windows-shell:=["pwsh.exe","-c"]
+set windows-shell := ["pwsh.exe", "-c"]
 
-export DB_URI:="mysql:host=localhost:3305;dbname=the_files_spot"
-export DB_USER:="root"
-export DB_PASS:="vineet"
-
-phpunit_version:="11"
+export DB_URI := "mysql:host=localhost:3305;dbname=the_files_spot"
+export DB_USER := "root"
+export DB_PASS := "vineet"
+phpunit_version := "11"
 
 default:
     just --list
@@ -44,7 +43,7 @@ setup-composer:
     php -c . -t src -r "unlink('composer-setup.php');"
 
 setup-phpunit:
-    # Invoke-WebRequest 'https://phar.phpunit.de/phpunit-{{phpunit_version}}.phar' -OutFile 'phpunit.phar'
+    # Invoke-WebRequest 'https://phar.phpunit.de/phpunit-{{ phpunit_version }}.phar' -OutFile 'phpunit.phar'
     just do-composer require --dev phpunit/phpunit ^11
 
 setup-phpcs:
@@ -60,16 +59,16 @@ setup-deps:
     just do-composer install
 
 do-composer +ccmd="list":
-    php -c . composer.phar {{ccmd}}
+    php -c . composer.phar {{ ccmd }}
 
 phpunit +ccmd="--version":
-    php -c . ./vendor/bin/phpunit {{ccmd}}
+    php -c . ./vendor/bin/phpunit {{ ccmd }}
 
 phpcs +ccmd="src public":
-    php -c . ./vendor/bin/phpcs {{ccmd}}
+    php -c . ./vendor/bin/phpcs {{ ccmd }}
 
 phpcbf +ccmd="src public":
-    php -c . ./vendor/bin/phpcs {{ccmd}}
+    php -c . ./vendor/bin/phpcs {{ ccmd }}
 
 phan +ccmd="":
-    php -c . ./vendor/bin/phan {{ccmd}}
+    php -c . ./vendor/bin/phan {{ ccmd }}
