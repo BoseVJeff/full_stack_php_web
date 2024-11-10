@@ -77,7 +77,7 @@ if ($http_method == "POST") {
         http_response_code(401);
         header('WWW-Authenticate: Basic');
         header('WWW-Authenticate: Bearer');
-        echo json_encode(["error" => "Credentials Required!", "server" => $_SERVER]);
+        echo json_encode(["error" => "Credentials Required!"]);
         exit();
     }
 
