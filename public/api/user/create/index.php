@@ -17,7 +17,7 @@ $http_method = $_SERVER['REQUEST_METHOD'];
 
 if ($http_method != "POST") {
     http_response_code(405);
-    echo json_encode(["error" => "Only GET is supported!"]);
+    echo json_encode(["error" => "Only POST is supported!"]);
 } else {
     if (! isset($_POST['username']) || ! isset($_POST['password'])) {
         http_response_code(400);
