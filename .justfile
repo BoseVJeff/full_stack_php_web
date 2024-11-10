@@ -71,4 +71,4 @@ phpcbf +ccmd="src public":
     php -c . ./vendor/bin/phpcs {{ ccmd }}
 
 phan +ccmd="":
-    php -c . ./vendor/bin/phan {{ ccmd }}
+    php -c . ./vendor/bin/phan --color --analyze-twice {{ ccmd }}
