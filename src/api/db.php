@@ -90,7 +90,7 @@ class Database
     /**
      * The last exception that was seen by this class.
      */
-    private ?PDOException $last_exception = null;
+    public ?PDOException $last_exception = null;
 
     /**
      * @param PDO|null $conn
