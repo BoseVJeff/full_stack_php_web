@@ -51,13 +51,6 @@ if ($http_method == "POST") {
         }
     }
 } elseif ($http_method == "GET") {
-    // if (! isset($_SERVER['PHP_AUTH_USER'])) {
-    //     http_response_code(401);
-    //     header('WWW-Authenticate: Basic');
-    //     header('HTTP/1.0 401 Unauthorized');
-    //     echo json_encode(["error" => "Credentials Required!"]);
-    //     exit();
-    // }
     if (isset($_SERVER['PHP_AUTH_USER'])) {
         $username = $_SERVER['PHP_AUTH_USER'];
         $password = $_SERVER['PHP_AUTH_PW'];
@@ -75,8 +68,7 @@ if ($http_method == "POST") {
 
     } else {
         http_response_code(401);
-        header('WWW-Authenticate: Basic');
-        header('WWW-Authenticate: Bearer');
+        header('WWW-Authenticate: Basic, Bearer');
         echo json_encode(["error" => "Credentials Required!"]);
         exit();
     }
