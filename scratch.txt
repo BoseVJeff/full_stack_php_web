@@ -58,12 +58,16 @@ mysql> ALTER TABLE file ADD mimetype VARCHAR(30);
 Query OK, 0 rows affected (0.15 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
+mysql> ALTER TABLE file MODIFY name CHAR(64) UNIQUE NOT NULL;
+Query OK, 0 rows affected, 1 warning (0.26 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
 mysql> DESC file;
 +---------------+--------------+------+-----+-------------------+-------------------+
 | Field         | Type         | Null | Key | Default           | Extra             |
 +---------------+--------------+------+-----+-------------------+-------------------+
 | id            | int          | NO   | PRI | NULL              | auto_increment    |
-| name          | char(32)     | NO   | UNI | NULL              |                   |
+| name          | char(64)     | NO   | UNI | NULL              |                   |
 | user_id       | int          | NO   | MUL | NULL              |                   |
 | upload        | timestamp    | NO   |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
 | original_name | varchar(255) | YES  |     | NULL              |                   |

@@ -3,6 +3,11 @@
 require_once "base.php";
 require_once "db.php";
 
+// The directory to upload the users' files.
+//
+// Note that each user will additionally have a folder of their name generated.
+$uploads_dir = $_SERVER['DOCUMENT_ROOT'] . "/uploads/";
+
 class User
 {
     /**
@@ -165,10 +170,10 @@ class User
         $file_mimetype = $mime_type ?? mime_content_type($file);
 
         if (! is_dir($this->name)) {
-            mkdir($uploads_dir . $this->name);
+            mkdir($this->name, 0777, true);
         }
 
-        $file_path = $uploads_dir . $this->name . "/" . $file_hash;
+        $file_path = $this->name . "/" . $file_hash;
 
         try {
             move_uploaded_file($file, $file_path);
@@ -177,6 +182,7 @@ class User
 
             return $file_hash;
         } catch (Exception $e) {
+            echo $e;
             return null;
         }
     }
