@@ -125,6 +125,7 @@ class User
         try {
             $tok = $this->db->createToken($this, $label);
             if ($tok) {
+                $this->tokens[] = $tok;
                 return $tok;
             } else {
                 return null;
