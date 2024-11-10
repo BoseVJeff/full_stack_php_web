@@ -3,7 +3,7 @@
 // The directory to upload the users' files.
 //
 // Note that each user will additionally have a folder of their name generated.
-$uploads_dir = "../uploads/";
+$uploads_dir = $_SERVER['DOCUMENT_ROOT'] . "/uploads/";
 
 /**
  * An enum-ish class with types of permissions and their values.
@@ -73,7 +73,7 @@ class Token
 
     /**
      * @param string $token
-     * @param string $label
+     * @param string|null $label
      */
     public function __construct(string $token, ?string $label)
     {
@@ -82,7 +82,7 @@ class Token
     }
 
     /**
-     * @param string $label
+     * @param string|null $label
      */
     public static function generate(?string $label = null): Token
     {
