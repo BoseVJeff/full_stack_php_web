@@ -88,6 +88,11 @@ class Database
     private $add_file_stmt = null;
 
     /**
+     * @var PDOStatement|null
+     */
+    private $file_own_stmt = null;
+
+    /**
      * The last exception that was seen by this class.
      */
     public ?PDOException $last_exception = null;
@@ -117,6 +122,7 @@ class Database
         $this->set_email_stmt   = $this->con->prepare("UPDATE user SET email=:email WHERE id=:id");
         $this->set_pass_stmt    = $this->con->prepare("UPDATE user SET password=:password WHERE id=:id");
         $this->add_file_stmt    = $this->con->prepare("INSERT INTO file (name, user_id, original_name, size, mimetype) VALUES (:name, :id, :orig, :size, :mime)");
+        $this->file_own_stmt    = $this->con->prepare("SELECT user_id FROM file WHERE name=:file");
     }
 
     public function __destruct()
@@ -318,6 +324,24 @@ class Database
             } else {
                 throw $e;
             }
+        }
+    }
+
+    public function getFileOwnerId(string $file_id): int
+    {
+        $this->file_own_stmt->bindParam(":file", $file_id, PDO::PARAM_STR);
+
+        try {
+            $this->file_own_stmt->execute();
+
+            $id = -1;
+            foreach ($this->file_own_stmt as $row) {
+                $id = $row['user_id'];
+            }
+            return $id;
+        } catch (PDOException $e) {
+            $this->last_exception = $e;
+            return -1;
         }
     }
 

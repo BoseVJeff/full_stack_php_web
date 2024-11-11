@@ -55,6 +55,14 @@ class Permission
     }
 
     /**
+     * Ownership allowed
+     */
+    public static function own(): Permission
+    {
+        return new Permission(1000);
+    }
+
+    /**
      * Returns true only if an action requiring `action_permission` can be performed
      * by a user having `$this` permission.
      *

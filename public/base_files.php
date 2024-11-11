@@ -3,9 +3,40 @@ declare (strict_types = 1);
 
 require_once "../src/utils/utils.php";
 require_once "../src/api/db.php";
+require_once "../src/api/base.php";
 
 // echoln("Hello from ". $_SERVER['REQUEST_URI']);
 // echoln("This will attempt to access the file named " . basename($_SERVER["REQUEST_URI"]));
+
+$user = null;
+if (isset($_SERVER['PHP_AUTH_USER'])) {
+    $username = $_SERVER['PHP_AUTH_USER'];
+    $password = $_SERVER['PHP_AUTH_PW'];
+
+    $user = User::getUser($username, $password);
+} elseif (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+    $auth = explode(" ", trim($_SERVER['HTTP_AUTHORIZATION']));
+    if ($auth[0] != "Bearer") {
+        http_response_code(400);
+        echo json_encode(["error" => "Bad Auth Header!"]);
+        exit();
+    }
+    $token = $auth[1];
+    $user  = User::getTokenUser($token);
+
+} else {
+    http_response_code(401);
+    header('WWW-Authenticate: Basic, Bearer');
+    echo json_encode(["error" => "Credentials Required!"]);
+    exit();
+}
+
+if ($user == null) {
+    http_response_code(401);
+    header('WWW-Authenticate: Basic, Bearer');
+    echo json_encode(["error" => "Invalid Credentials!"]);
+    exit();
+}
 
 // The filename is the last uri segment
 function getFilename(string $url): string
@@ -16,7 +47,7 @@ function getFilename(string $url): string
 }
 
 $method      = $_SERVER["REQUEST_METHOD"];
-$uploads_dir = "../uploads/";
+$uploads_dir = "api/files/" . $user->name . "/";
 // $filename=basename($_SERVER["REQUEST_URI"]);
 $filename    = getFilename($_SERVER['REQUEST_URI']);
 $upload_path = $uploads_dir . $filename;
@@ -28,8 +59,36 @@ $range       = null;
 
 function isAllowed(string $file): bool
 {
-    // TODO: Implement this
-    if (Utils::checkVar($_SERVER['PHP_AUTH_USER'], 'test') & Utils::checkVar($_SERVER['PHP_AUTH_PW'], 'test')) {
+    if (isset($_SERVER['PHP_AUTH_USER'])) {
+        $username = $_SERVER['PHP_AUTH_USER'];
+        $password = $_SERVER['PHP_AUTH_PW'];
+
+        $user = User::getUser($username, $password);
+    } elseif (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+        $auth = explode(" ", trim($_SERVER['HTTP_AUTHORIZATION']));
+        if ($auth[0] != "Bearer") {
+            http_response_code(400);
+            echo json_encode(["error" => "Bad Auth Header!"]);
+            exit();
+        }
+        $token = $auth[1];
+        $user  = User::getTokenUser($token);
+
+    } else {
+        http_response_code(401);
+        header('WWW-Authenticate: Basic, Bearer');
+        echo json_encode(["error" => "Credentials Required!"]);
+        exit();
+    }
+
+    if ($user == null) {
+        http_response_code(401);
+        header('WWW-Authenticate: Basic, Bearer');
+        echo json_encode(["error" => "Invalid Credentials!"]);
+        exit();
+    }
+
+    if ($user->getAccessLevel($file) >= Permission::read_only()->level) {
         return true;
     } else {
         return false;

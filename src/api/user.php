@@ -190,6 +190,11 @@ class User
     public function getAccessLevel(string $filename, ?Token $token = null): int
     {
         try {
+            $ownerId = $this->db->getFileOwnerId($filename);
+            if ($ownerId == $this->id) {
+                return Permission::own()->level;
+            }
+
             $file_access_level = $this->db->getPermission($filename, $this->id);
             $access_level      = $file_access_level;
             if ($token != null) {
