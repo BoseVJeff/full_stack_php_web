@@ -89,9 +89,9 @@ function getFilename(string $url): string
     return $uri_segments[count($uri_segments) - 1];
 }
 
-function isAllowed(User $user, string $file): bool
+function isAllowed(User $user, string $file, Permission $requiredPermission): bool
 {
-    return $user->getAccessLevel($file) >= Permission::read_only()->level;
+    return $user->getAccessLevel($file) >= $requiredPermission->level;
 }
 
 // Main execution
@@ -122,7 +122,7 @@ $file_exists = ! empty($filename) && file_exists($upload_path);
 switch ($method) {
     case 'GET':
         if ($file_exists) {
-            if (isAllowed($user, $filename)) {
+            if (isAllowed($user, $filename, Permission::read_only())) {
                 $range = $_SERVER['HTTP_RANGE'] ?? null;
                 sendFile($upload_path, $file, $range);
             } else {
@@ -138,6 +138,25 @@ switch ($method) {
     case 'POST':
         http_response_code(405);
         echo json_encode(["error" => "Method not implemented"]);
+        break;
+
+    case 'DELETE':
+        if ($file_exists) {
+            if (isAllowed($user, $filename, Permission::read_write())) {
+                // $range = $_SERVER['HTTP_RANGE'] ?? null;
+                // sendFile($upload_path, $file, $range);
+                unlink($upload_path);
+                $user->deleteFile($filename);
+                http_response_code(200);
+                echo json_encode(["delete" => "success"]);
+            } else {
+                http_response_code(403);
+                echo json_encode(["error" => "Access Denied"]);
+            }
+        } else {
+            http_response_code(404);
+            echo json_encode(["error" => "File '$filename' not found"]);
+        }
         break;
 
     default:

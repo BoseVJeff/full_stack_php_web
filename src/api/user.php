@@ -213,6 +213,16 @@ class User
         return $this->db->getFileInfo($filename, $this->id);
     }
 
+    public function getAllFiles(): array
+    {
+        return $this->db->getFiles($this->id);
+    }
+
+    public function deleteFile(string $filename): void
+    {
+        $this->db->deleteFileMetadata($filename, $this->id);
+    }
+
     public function toJson(): array
     {
         return [

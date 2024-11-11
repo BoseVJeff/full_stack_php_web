@@ -2,6 +2,7 @@
 declare (strict_types = 1);
 require_once "base.php";
 require_once "user.php";
+require_once "user_file.php";
 // require_once "../utils/CustomException.php";
 // require_once "CustomException.php";
 
@@ -98,6 +99,16 @@ class Database
     private $file_meta_stmt = null;
 
     /**
+     * @var PDOStatement|null
+     */
+    private $delete_file_stmt = null;
+
+    /**
+     * @var PDOStatement|null
+     */
+    private $get_files_stmt = null;
+
+    /**
      * The last exception that was seen by this class.
      */
     public ?PDOException $last_exception = null;
@@ -129,6 +140,8 @@ class Database
         $this->add_file_stmt    = $this->con->prepare("INSERT INTO file (name, user_id, original_name, size, mimetype) VALUES (:name, :id, :orig, :size, :mime)");
         $this->file_own_stmt    = $this->con->prepare("SELECT user_id FROM file WHERE name=:file");
         $this->file_meta_stmt   = $this->con->prepare("SELECT id, name, user_id, upload, original_name, size, mimetype FROM file WHERE name=:file AND user_id=:user");
+        $this->delete_file_stmt = $this->con->prepare("DELETE FROM file WHERE name=:file AND user_id=:user");
+        $this->get_files_stmt   = $this->con->prepare("SELECT * FROM file WHERE user_id=:id;");
     }
 
     public function __destruct()
@@ -367,6 +380,40 @@ class Database
         } catch (PDOException $e) {
             $this->last_exception = $e;
             return null;
+        }
+    }
+
+    /**
+     * @return UserFile[]
+     */
+    public function getFiles(int $user_id): array
+    {
+        $this->get_files_stmt->bindParam(":id", $user_id, PDO::PARAM_INT);
+
+        try {
+            $this->get_files_stmt->execute();
+
+            $files = [];
+            foreach ($this->get_files_stmt as $row) {
+                $files[] = new UserFile($row);
+            }
+            return $files;
+        } catch (PDOException $e) {
+            $this->last_exception = $e;
+            return [];
+        }
+    }
+
+    public function deleteFileMetadata(string $file_name, int $user_id): void
+    {
+        $this->delete_file_stmt->bindParam(":file", $file_name, PDO::PARAM_STR);
+        $this->delete_file_stmt->bindParam(":user", $user_id, PDO::PARAM_INT);
+
+        try {
+            $this->delete_file_stmt->execute();
+        } catch (PDOException $e) {
+            $this->last_exception = $e;
+            throw $e;
         }
     }
 
