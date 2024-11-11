@@ -1,51 +1,84 @@
 <?php declare (strict_types = 1);
 
-require_once "base.php";
-require_once "db.php";
-require_once "user.php";
-
-/**
- * Class to interact with files owned by a user.
- */
 class UserFile
 {
-    // Also user directory name
-    /**
-     * @var User|null The user that is accessing the file
-     */
-    private $user = null;
-
-    // Also file name
-    /**
-     * @var string|null The ID for the file being accessed
-     */
-    private $fileId = null;
+    private int $id;
+    private string $name;
+    private int $userId;
+    private string $upload;
+    private ?string $originalName;
+    private int $size;
+    private ?string $mimetype;
 
     /**
-     * @var Database|null The database that will be used to store file metadata
+     * Create a new File instance from a database row
+     *
+     * @param object $row Database row object containing file information
      */
-    private $db = null;
-
-    /**
-     * @var string The directory that files wil be uploaded to
-     */
-    private $uploadDir = $uploads_dir;
-
-    public function __construct(string $file_id, User $user, Database | null $database = null)
+    public function __construct($row)
     {
-        $this->fileId = $file_id;
-        $this->user   = $user;
-        $this->db     = $database ?? new Database();
+        $this->id           = $row['id'];
+        $this->name         = $row['name'];
+        $this->userId       = $row['user_id'];
+        $this->upload       = $row['upload'];
+        $this->originalName = $row['original_name'];
+        $this->size         = $row['size'];
+        $this->mimetype     = $row['mimetype'];
     }
 
-    public function exists(): bool
+    /**
+     * Get the file ID
+     */
+    public function getId(): int
     {
-        // Path to be tested is upload_dir/userId/fileId
-        return is_file($this->uploadDir . "/" . $this->user->name . "/" . $this->fileId);
+        return $this->id;
     }
 
-    public function __destruct()
+    /**
+     * Get the file name
+     */
+    public function getName(): string
     {
-        $this->db = null;
+        return $this->name;
+    }
+
+    /**
+     * Get the user ID
+     */
+    public function getUserId(): int
+    {
+        return $this->userId;
+    }
+
+    /**
+     * Get the upload timestamp
+     */
+    public function getUpload(): string
+    {
+        return $this->upload;
+    }
+
+    /**
+     * Get the original file name
+     */
+    public function getOriginalName(): ?string
+    {
+        return $this->originalName;
+    }
+
+    /**
+     * Get the file size
+     */
+    public function getSize(): int
+    {
+        return $this->size;
+    }
+
+    /**
+     * Get the file MIME type
+     */
+    public function getMimetype(): ?string
+    {
+        return $this->mimetype;
     }
 }

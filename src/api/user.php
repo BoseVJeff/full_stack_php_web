@@ -208,6 +208,11 @@ class User
         }
     }
 
+    public function getFile(string $filename): UserFile | null
+    {
+        return $this->db->getFileInfo($filename, $this->id);
+    }
+
     public function toJson(): array
     {
         return [

@@ -93,6 +93,11 @@ class Database
     private $file_own_stmt = null;
 
     /**
+     * @var PDOStatement|null
+     */
+    private $file_meta_stmt = null;
+
+    /**
      * The last exception that was seen by this class.
      */
     public ?PDOException $last_exception = null;
@@ -123,6 +128,7 @@ class Database
         $this->set_pass_stmt    = $this->con->prepare("UPDATE user SET password=:password WHERE id=:id");
         $this->add_file_stmt    = $this->con->prepare("INSERT INTO file (name, user_id, original_name, size, mimetype) VALUES (:name, :id, :orig, :size, :mime)");
         $this->file_own_stmt    = $this->con->prepare("SELECT user_id FROM file WHERE name=:file");
+        $this->file_meta_stmt   = $this->con->prepare("SELECT id, name, user_id, upload, original_name, size, mimetype FROM file WHERE name=:file AND user_id=:user");
     }
 
     public function __destruct()
@@ -342,6 +348,25 @@ class Database
         } catch (PDOException $e) {
             $this->last_exception = $e;
             return -1;
+        }
+    }
+
+    public function getFileInfo(string $file_name, int $user_id): UserFile | null
+    {
+        $this->file_meta_stmt->bindParam(":file", $file_name, PDO::PARAM_STR);
+        $this->file_meta_stmt->bindParam(":user", $user_id, PDO::PARAM_INT);
+
+        try {
+            $this->file_meta_stmt->execute();
+
+            $file = null;
+            foreach ($this->file_meta_stmt as $row) {
+                $file = new UserFile($row);
+            }
+            return $file;
+        } catch (PDOException $e) {
+            $this->last_exception = $e;
+            return null;
         }
     }
 
